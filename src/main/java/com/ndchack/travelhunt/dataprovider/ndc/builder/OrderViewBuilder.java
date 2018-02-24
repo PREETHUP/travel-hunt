@@ -164,7 +164,7 @@ public class OrderViewBuilder {
         for (org.iata.iata.edist.Passenger orderPax : orderPaxs.getPassenger()) {
 
             Passenger pax = new Passenger();
-            pax.setPassengerName(orderPax.getName().getGiven() + " " + orderPax.getName().getSurname());
+            pax.setPassengerName(orderPax.getName().getGiven().get(0).getValue() + " " + orderPax.getName().getSurname().getValue());
             pax.setPassengerType(orderPax.getPTC().getValue());
             paxs.add(pax);
         }

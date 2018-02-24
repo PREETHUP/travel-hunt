@@ -1,12 +1,11 @@
 package com.ndchack.travelhunt.controller;
 
-import com.ndchack.travelhunt.Util.Configuration;
 import com.ndchack.travelhunt.service.UserAncillaryService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.AncillaryIdWrapper;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * Created by a-6281 on 2/24/18.
@@ -29,8 +28,8 @@ public class AncillaryController {
         return userAncillaryService.getAncillaryResponse();
     }
 
-    @RequestMapping(value="/set/user/ancillaries",method = RequestMethod.POST)
-    public UserAncillaryResponse setUserAncillary(@RequestBody AncillaryIdWrapper ancillaryIdWrapper){
+    @RequestMapping(value="/set/user/ancillaries",method = RequestMethod.POST, consumes = "application/json")
+    public UserAncillaryResponse setUserAncillary(@RequestBody AncillaryIdWrapper ancillaryIdWrapper, @RequestParam(value = "ancillaryId") String ancillaryIds){
         userAncillaryService.setUserAncillary(ancillaryIdWrapper.getAncillaryIds());
         return userAncillaryService.retrieveUserAncillaryDetails();
     }
