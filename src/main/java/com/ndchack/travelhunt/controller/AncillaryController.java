@@ -1,7 +1,9 @@
 package com.ndchack.travelhunt.controller;
 
+import com.ndchack.travelhunt.Util.Configuration;
 import com.ndchack.travelhunt.service.UserAncillaryService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,9 +32,19 @@ public class AncillaryController {
 
     }
 
-    @RequestMapping(value="/get/ancillaries",method = RequestMethod.POST)
-    public UserAncillaryResponse getAirAncillary(){
-       return new UserAncillaryResponse();
+    @RequestMapping(value="/list/ancillaries",method = RequestMethod.POST)
+    public UserAncillaryResponse getAncillaryList(){
+
+        if(new DateTime().isBefore(Configuration.departureTime) || new DateTime().isAfter(Configuration.returnDepartureTime.minusHours(6))){
+            return new UserAncillaryResponse();
+        } else if (Configuration.userSelectedAncillary.size() > 0 && !Configuration.userSelectedAncillary.isEmpty()) {
+            return userAncillaryService.retrieveUserAncillaryDetails();
+        } else if (Configuration.airlineAncillary.size() > 0 && !Configuration.airlineAncillary.isEmpty()) {
+            return userAncillaryService.retrieveAirlineAncillaryDetails();
+        } else {
+            return userAncillaryService.retrieveAirAncillaryDetailsWithApiCall();
+        }
+
     }
 
     @RequestMapping(value="/get/mock/ancillaries",method = RequestMethod.GET)
