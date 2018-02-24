@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 /**
  * Created by a-6281 on 2/24/18.
  */
-public class TripDetails {
+public class TripDetail {
 
     String source;
     String sourceCode;
@@ -18,7 +18,7 @@ public class TripDetails {
 
     //Economy
     String cabinType;
-    String isRefundable;
+    Boolean isRefundable;
     //Non-stop
     String travelType;
 
@@ -74,11 +74,11 @@ public class TripDetails {
         this.cabinType = cabinType;
     }
 
-    public String getIsRefundable() {
+    public Boolean getIsRefundable() {
         return isRefundable;
     }
 
-    public void setIsRefundable(String isRefundable) {
+    public void setIsRefundable(Boolean isRefundable) {
         this.isRefundable = isRefundable;
     }
 

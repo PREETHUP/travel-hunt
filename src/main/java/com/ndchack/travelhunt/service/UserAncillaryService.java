@@ -15,7 +15,13 @@ public class UserAncillaryService {
 
     public UserAncillaryResponse retrieveUserAncillaryDetails(){
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
-        userAncillaryResponse.setUserAncillaryDetails(retriveeUpdatedUserAncillaryDetails());
+        userAncillaryResponse.setUserAncillaryDetails(retriveUpdatedUserAncillaryDetails());
+        return userAncillaryResponse;
+    }
+
+    public UserAncillaryResponse retrieveAirAncillaryDetails(){
+        UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
+        userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         return userAncillaryResponse;
     }
 
@@ -30,7 +36,7 @@ public class UserAncillaryService {
         }
     }
 
-    private List<UserAncillaryDetail> retriveeUpdatedUserAncillaryDetails() {
+    private List<UserAncillaryDetail> retriveUpdatedUserAncillaryDetails() {
         List<UserAncillaryDetail> userAncillaryDetails= new ArrayList<UserAncillaryDetail>();
         for(String userAncillaryName :  Configuration.userSelectedAncillary.keySet()) {
             UserAncillaryDetail userAncillaryDetail = new UserAncillaryDetail();
@@ -40,6 +46,18 @@ public class UserAncillaryService {
             userAncillaryDetail.setDiscountedAmount(discountedAmount);
             userAncillaryDetail.setTotalAmount(totalAmount);
             userAncillaryDetail.setSavedAmount(totalAmount-discountedAmount);
+            userAncillaryDetails.add(userAncillaryDetail);
+        }
+        Collections.sort(userAncillaryDetails);
+        return userAncillaryDetails;
+    }
+
+    private List<UserAncillaryDetail> getAllAirAncillaryDetailsFromDb() {
+        List<UserAncillaryDetail> userAncillaryDetails= new ArrayList<UserAncillaryDetail>();
+        for(String userAncillaryName :  Configuration.airlineAncillary.keySet()) {
+            UserAncillaryDetail userAncillaryDetail = new UserAncillaryDetail();
+            userAncillaryDetail.setAncillaryName(userAncillaryName);
+            userAncillaryDetail.setTotalAmount(Configuration.airlineAncillary.get(userAncillaryName));
             userAncillaryDetails.add(userAncillaryDetail);
         }
         Collections.sort(userAncillaryDetails);

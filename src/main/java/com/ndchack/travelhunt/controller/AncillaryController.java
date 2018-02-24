@@ -30,6 +30,16 @@ public class AncillaryController {
 
     }
 
+    @RequestMapping(value="/get/ancillaries",method = RequestMethod.POST)
+    public UserAncillaryResponse getAirAncillary(){
+       return new UserAncillaryResponse();
+    }
+
+    @RequestMapping(value="/get/mock/ancillaries",method = RequestMethod.GET)
+    public UserAncillaryResponse getmockAirAncillary(){
+        return userAncillaryService.retrieveAirAncillaryDetails();
+    }
+
 
 
 

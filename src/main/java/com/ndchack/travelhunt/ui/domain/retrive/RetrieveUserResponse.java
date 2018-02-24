@@ -1,39 +1,37 @@
 package com.ndchack.travelhunt.ui.domain.retrive;
 
 
-import java.util.List;
-
 /**
  * Created by a-6281 on 2/24/18.
  */
 public class RetrieveUserResponse {
 
-    TravelerDetails travelerDetails;
-    TripDetails firstLeg;
-    TripDetails secondLeg;
+    TravelerDetail travelerDetails;
+    TripDetail firstLeg;
+    TripDetail secondLeg;
     RetrieveRateDetails retriveRateDetails;
 
-    public TravelerDetails getTravelerDetails() {
+    public TravelerDetail getTravelerDetails() {
         return travelerDetails;
     }
 
-    public void setTravelerDetails(TravelerDetails travelerDetails) {
+    public void setTravelerDetails(TravelerDetail travelerDetails) {
         this.travelerDetails = travelerDetails;
     }
 
-    public TripDetails getFirstLeg() {
+    public TripDetail getFirstLeg() {
         return firstLeg;
     }
 
-    public void setFirstLeg(TripDetails firstLeg) {
+    public void setFirstLeg(TripDetail firstLeg) {
         this.firstLeg = firstLeg;
     }
 
-    public TripDetails getSecondLeg() {
+    public TripDetail getSecondLeg() {
         return secondLeg;
     }
 
-    public void setSecondLeg(TripDetails secondLeg) {
+    public void setSecondLeg(TripDetail secondLeg) {
         this.secondLeg = secondLeg;
     }
 
