@@ -22,7 +22,7 @@ public class MainController {
 
     @RequestMapping(value="/",method = RequestMethod.GET)
     public String homepage(){
-        return "index";
+        return "Landing";
     }
 
     @RequestMapping(value="/update/discount",method = RequestMethod.GET)

@@ -27,8 +27,8 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">NYC - SFO</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">SFO - NYC</a>
         </div>
-        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-            <div class="w3-row">
+        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" ng-app="travelhunt">
+            <div class="w3-row" ng-controller=AncillarySelection>
                 <div class="w3-col m3">
                     <div class="w3-card w3-round">
                         <div class="w3-white">
@@ -56,19 +56,19 @@
 
                                                                 <tr class="detailtax">
                                                                     <td colspan="4"> Base Fare </td>
-                                                                    <td class="tr pax_1"><i class="rs">Rs.</i>5,662</td>
+                                                                    <td class="tr pax_1">{{tripdetails.basefare}} <i class="rs">{{tripdetails.currency}}</i></td>
 
                                                                 </tr>
-                                                                <tr class="detailtax" ng-repeat="txt in flDtl.dataNodes" ng-show="getfare('ADT', txt.key) != '0' || getfare('CHD', txt.key) != '0' || getfare('INF', txt.key) != '0'" ng-if="tenentScope != 'dom2' & amp; & amp; txt.key != 'WC'">
-                                                                    <td colspan="4"> Airline Fuel Surcharges </td>
-                                                                    <td class="tr pax_1"><i class="rs">Rs.</i>1,576</td>
+                                                                <tr class="detailtax">
+                                                                    <td colspan="4"> Taxes </td>
+                                                                    <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
 
                                                                 </tr>
                                                             </tbody>
                                                             <tbody class="detailtax bg-grey">
                                                                 <tr class="">
                                                                     <td colspan="4" class="bold no-border"> Total </td>
-                                                                    <td colspan="4" class="tr bold no-border"><i class="rs">Rs.</i> 7,238</td>
+                                                                    <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
                                                                 </tr>
                                                             </tbody>
 
@@ -92,20 +92,20 @@
                                                     <li class="trip-type">
                                                         <i class="ytfi-clock-1 ">&nbsp;</i>
                                                         <time>
-                                                            06h 46m
+                                                            {{firstLeg.arrivalTime}}
                                                         </time>
                                                         <span class="pipe">|</span>
-                                                        <span > Non Stop</span>
+                                                        <span > {{firstLeg.travelType}}</span>
 
                                                         <span class="pipe"> | </span>
-                                                        <span>Free Meals</span>
+                                                        <span>{{firstLeg.destination}}</span>
                                                         <div class="air-journey">
                                                             <span class="fl">&nbsp;</span>
                                                             <i class=""></i>
                                                             <span class="fr">&nbsp;</span>
                                                         </div>
                                                         <h4 class="">
-                                                            <span class="ref-ui"> Economy Class &nbsp;</span>
+                                                            <span class="ref-ui"> {{firstLeg.cabinType}} &nbsp;</span>
                                                             <span >
                                                                 <span class="pipe"> | </span>
                                                                 <span class="ref-ui">Refundable</span>
@@ -158,31 +158,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-app="travelhunt">
-		                            <div ng-controller=AncillarySelection>
-		                                <table class="w3-table-all">
-		                                    <tr class="w3-green">
-		                                        <th></th>
-												<th>Ancillary</th>
-												<th>Actual Price</th>
-												<th>Discount Price</th>
-		                                    </tr>
-		                                    <tr ng-repeat="ancillary in myData.data.ancillaries">
-												<td><input type="checkbox" ng-model="ancillary[0]"></td>
-												<td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
-												<td>{{ancillary[2]}}%</td>
-												<td>{{ancillary[3]}}%</td>
-											</tr>
-		                                </table>
-		                                <hr>
-		                                <code class="w3-codespan">
-		                                    Select any ancillery to start the game.
-		                                    Upon completion we get discount based on the gamepoints  
-		                                </code>
-		                                <hr>
-		                                <p><button class="w3-button w3-green w3-third" ng-click="startGame()">Start Game</button></p>
-	                                </div>
-								</div>
+
+
+                                <table class="w3-table-all">
+                                    <tr class="w3-green">
+                                        <th></th>
+                                        <th>Ancillary</th>
+                                        <th>Actual Price</th>
+                                        <th>Discount Price</th>
+                                    </tr>
+                                    <tr ng-repeat="ancillary in myData.data.ancillaries">
+                                        <td><input type="checkbox" ng-model="ancillary[0]"></td>
+                                        <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
+                                        <td>{{ancillary[2]}}%</td>
+                                        <td>{{ancillary[3]}}%</td>
+                                    </tr>
+                                </table>
+                                <hr>
+                                <code class="w3-codespan">
+                                    Select any ancillery to start the game.
+                                    Upon completion we get discount based on the gamepoints
+                                </code>
+                                <hr>
+                                <p><button class="w3-button w3-green w3-third" ng-click="startGame()">Start Game</button></p>
+
+
 								
                                 <div  id="apartment">
                                     <h4 class="w3-text-green">Welcome to the game</h4>
@@ -332,7 +332,16 @@
 			app.controller('AncillarySelection', function($scope, $http) {
 	
 				angular.element(document).ready(function() {
-					$http.get('/public_html/content.json').then(function(response) {
+
+                    $http.get("/retrieve/mock/trips?orderId=1").then(function(response){
+                       $scope.tripdetails = response.data.retriveRateDetails;
+                        $scope.firstLeg = response.data.firstLeg;
+                        $scope.secondLeg = response.data.secondLeg;
+                        var arrDate = $scope.firstLeg.arrivalTime;
+                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
+                    });
+
+					$http.get('/content.json').then(function(response) {
 						$scope.myData = response;
 					});
 				});
