@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <title>W3.CSS Template</title>
+    <title>Travel Hunt</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/airtools-general.css">
@@ -86,7 +86,7 @@
                                                     <li class="trip-type">
                                                         <i class="ytfi-clock-1 ">&nbsp;</i>
                                                         <time>
-                                                            {{firstLeg.arrivalTime}}
+                                                            {{firstLeg.departureTime}}
                                                         </time>
                                                         <span class="pipe">|</span>
                                                         <span > {{firstLeg.travelType}}</span>
@@ -102,7 +102,7 @@
                                                             <span class="ref-ui"> {{firstLeg.cabinType}} &nbsp;</span>
                                                             <span >
                                                                 <span class="pipe"> | </span>
-                                                                <span class="ref-ui">Refundable</span>
+                                                                <span class="{{firstLeg.isRefundableClass}}">Refundable</span>
                                                             </span>
                                                         </h4>
                                                     </li>
@@ -126,23 +126,23 @@
                                                         <li class="trip-type">
                                                             <i class="ytfi-clock-1 ">&nbsp;</i>
                                                             <time>
-                                                                06h 46m
+                                                            {{secondLeg.departureTime}}
                                                             </time>
                                                             <span class="pipe">|</span>
-                                                            <span > Non Stop</span>
+                                                        <span > {{secondLeg.travelType}}</span>
 
                                                             <span class="pipe"> | </span>
-                                                            <span>Free Meals</span>
+                                                        <span>{{secondLeg.destination}}</span>
                                                             <div class="air-journey">
                                                                 <span class="fl">&nbsp;</span>
                                                                 <i class=""></i>
                                                                 <span class="fr">&nbsp;</span>
                                                             </div>
                                                             <h4 class="">
-                                                                <span class="ref-ui"> Economy Class &nbsp;</span>
+                                                            <span class="ref-ui"> {{secondLeg.cabinType}} &nbsp;</span>
                                                                 <span >
                                                                     <span class="pipe"> | </span>
-                                                                    <span class="ref-ui">Refundable</span>
+                                                                <span class="{{secondLeg.isRefundableClass}}">Refundable</span>
                                                                 </span>
                                                             </h4>
                                                         </li>
@@ -165,14 +165,14 @@
                                         <tr ng-repeat="ancillary in myData.data.ancillaries">
                                             <td><input type="checkbox" ng-model="ancillary[0]"></td>
                                             <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
-                                            <td>{{ancillary[2]}}%</td>
-                                            <td>{{ancillary[3]}}%</td>
+                                        <td>{{ancillary[2]}}</td>
+                                        <td>{{ancillary[3]}}</td>
                                         </tr>
                                     </table>
                                     <hr>
                                     <code class="w3-codespan">
-                                        Select any ancillery to start the game.
-                                        Upon completion we get discount based on the gamepoints
+                                    Select any ancillary to start the game.
+                                    Upon completion we get discount based on the game points
                                     </code>
                                     <hr>
                                     <p ><button style="
@@ -184,7 +184,7 @@
 
                                     <div  id="apartment"  >
                                         <h5 class="w3-text-green" style=" padding-left: 12%; font-size: 20px; font-weight: 900; font-family: sans-serif; text-decoration: underline; ">Welcome to the game</h5>
-                                        <h6 class="w3-text-blue">Ancillery wifi -> 150pts</h6>
+                                        <h6 class="w3-text-blue">Ancillary wifi -> 150pts</h6>
                                         <div class="w3-display-container mySlides  w3-card-4">
                                             <img id="img_1_" class="w3-opacity-max" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
@@ -369,6 +369,7 @@
             // Slideshow Apartment Images
             var slideIndex = 1;
             showDivs(slideIndex);
+
             function plusDivs(n) {
             showDivs(slideIndex += n);
             }
@@ -405,6 +406,7 @@
         <script>
             var acc = document.getElementsByClassName("accordion");
             var i;
+
             for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function () {
             this.classList.toggle("active");
@@ -427,14 +429,23 @@
             $http.get("/retrieve/mock/trips?orderId=1").then(function(response){
             $scope.tripdetails = response.data.retriveRateDetails;
             $scope.firstLeg = response.data.firstLeg;
+                        var f_depDate = new Date($scope.firstLeg.departureTime);
+                        $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
+						$scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+
             $scope.secondLeg = response.data.secondLeg;
-            var arrDate = $scope.firstLeg.arrivalTime;
-//                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
+                        var s_depDate = new Date($scope.secondLeg.departureTime);
+                        $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
+                        $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+                        
             });
+
             $http.get('/content.json').then(function(response) {
             $scope.myData = response;
             });
             });
+				
+				
             });
         </script>
     </body>
