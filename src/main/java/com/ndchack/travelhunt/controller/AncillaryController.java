@@ -1,6 +1,7 @@
 package com.ndchack.travelhunt.controller;
 
 import com.ndchack.travelhunt.Util.Configuration;
+import com.ndchack.travelhunt.dataprovider.ndc.model.OrderView;
 import com.ndchack.travelhunt.service.UserAncillaryService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
 import org.joda.time.DateTime;
@@ -19,23 +20,22 @@ public class AncillaryController {
     @Autowired
     private UserAncillaryService userAncillaryService;
 
-    @RequestMapping(value="/retrive/ancillaries",method = RequestMethod.POST)
-    public String getAncillary(@RequestParam(value = "id") String Id){
-        //Service call
+    @RequestMapping(value = "/retrive/ancillaries", method = RequestMethod.POST)
+    public String getAncillary(@RequestParam(value = "id") String Id) {
         return "index";
     }
 
-    @RequestMapping(value="/update/ancillaries",method = RequestMethod.POST)
-    public UserAncillaryResponse updateAncillaryAmount(@RequestParam(value = "tasksFinished") Integer tasksFinished, @RequestParam(value = "totalTasks") Integer totalTasks){
+    @RequestMapping(value = "/update/ancillaries", method = RequestMethod.POST)
+    public UserAncillaryResponse updateAncillaryAmount(@RequestParam(value = "tasksFinished") Integer tasksFinished, @RequestParam(value = "totalTasks") Integer totalTasks) {
         userAncillaryService.updateUserAncillary(tasksFinished, totalTasks);
-        return  userAncillaryService.retrieveUserAncillaryDetails();
+        return userAncillaryService.retrieveUserAncillaryDetails();
 
     }
 
-    @RequestMapping(value="/list/ancillaries",method = RequestMethod.POST)
-    public UserAncillaryResponse getAncillaryList(){
+    @RequestMapping(value = "/list/ancillaries", method = RequestMethod.POST)
+    public UserAncillaryResponse getAncillaryList() {
 
-        if(new DateTime().isBefore(Configuration.departureTime) || new DateTime().isAfter(Configuration.returnDepartureTime.minusHours(6))){
+        if (new DateTime().isBefore(Configuration.departureTime) || new DateTime().isAfter(Configuration.returnDepartureTime.minusHours(6))) {
             return new UserAncillaryResponse();
         } else if (Configuration.userSelectedAncillary.size() > 0 && !Configuration.userSelectedAncillary.isEmpty()) {
             return userAncillaryService.retrieveUserAncillaryDetails();
@@ -47,12 +47,10 @@ public class AncillaryController {
 
     }
 
-    @RequestMapping(value="/get/mock/ancillaries",method = RequestMethod.GET)
-    public UserAncillaryResponse getmockAirAncillary(){
+    @RequestMapping(value = "/get/mock/ancillaries", method = RequestMethod.GET)
+    public UserAncillaryResponse getmockAirAncillary() {
         return userAncillaryService.retrieveAirlineAncillaryDetails();
     }
-
-
 
 
 }

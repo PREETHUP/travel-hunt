@@ -28,25 +28,31 @@ public class ScheduledJob {
     @Autowired
     private ScheduledAnnotationBeanPostProcessor postProcessor;
 
+    @Autowired
+    private Configuration configuration;
+
     private static final Logger log = LoggerFactory.getLogger(ScheduledJob.class);
     private boolean stop = false;
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 10000, initialDelay = 50000)
     public void checkTime() {
-        DateTime returnDepartureTime = Configuration.returnDepartureTime
-                .withSecondOfMinute(0)
-                .withMinuteOfHour(0)
-                .withMillisOfSecond(0);
-        DateTime currentTime = new DateTime()
-                .withSecondOfMinute(0)
-                .withMinuteOfHour(0)
-                .withMillisOfSecond(0)
-                .plusHours(6);
-        log.info("Checking if we should trigger the notification.");
-        if (returnDepartureTime.compareTo(currentTime) == 0 && stop != true) {
-            stop = true;
-            log.info("Completed!!");
-            postProcessor.destroy();
+        if (configuration.returnDepartureTime != null) {
+            DateTime returnDepartureTime = configuration.returnDepartureTime
+                    .withSecondOfMinute(0)
+                    .withMinuteOfHour(0)
+                    .withMillisOfSecond(0);
+            log.info(String.valueOf(returnDepartureTime));
+            DateTime currentTime = new DateTime()
+                    .withSecondOfMinute(0)
+                    .withMinuteOfHour(0)
+                    .withMillisOfSecond(0)
+                    .plusHours(6);
+            log.info("Checking if we should trigger the notification.");
+            if (returnDepartureTime.compareTo(currentTime) == 0 && stop != true) {
+                stop = true;
+                log.info("Completed!!");
+                postProcessor.destroy();
+            }
         }
     }
 }

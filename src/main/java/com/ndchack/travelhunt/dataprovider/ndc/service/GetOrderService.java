@@ -1,5 +1,6 @@
 package com.ndchack.travelhunt.dataprovider.ndc.service;
 
+import com.ibsplc.wsdl.ndc.NdcResServicePort;
 import com.ndchack.travelhunt.dataprovider.ndc.builder.CommonEntityBuilder;
 import com.ndchack.travelhunt.dataprovider.ndc.builder.OrderViewBuilder;
 import com.ndchack.travelhunt.dataprovider.ndc.connector.NDCAccessServer;
@@ -11,15 +12,21 @@ import org.iata.iata.edist.OrderViewRS;
 /**
  * Created by A-2174 on 2/24/18.
  */
-public class GetOrderService {
+public class GetOrderService extends NDCService {
 
-    public static OrderView getOrder(String locatorCode) {
+/*    public static void main(String[] args) {
+
+        GetOrderService service = new GetOrderService();
+        OrderView view = service.getOrder("R4254R");
+        System.out.print(view.getFare().getBaseFare());
+    }*/
+
+    public OrderView getOrder(String locatorCode) {
 
         OrderRetrieveRQ rq = createRequest(locatorCode);
         try {
-            NDCAccessServer server = new NDCAccessServer(CommonEntityBuilder.getURL());
-            OrderViewRS rs = server.getNdcResServiceSOAPPort().retrieveOrder(rq);
 
+            OrderViewRS rs = ndcServicePort.retrieveOrder(rq);
             return OrderViewBuilder.buildOrder(rs);
         } catch (Exception e) {
             e.printStackTrace();

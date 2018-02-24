@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/airtools-general.css">
+    <link rel="stylesheet" href="css/w3.css">
+    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
+    <style>
+        html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+    </style>
+    <body class="w3-theme-l5">
+        <div class="w3-top">
+            <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+                <a style=" background-color: #ffffffcc !important; " class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><img src="images/logo-sunexpress@2x.png" /></a>
+                <a style=" margin-left: 23%; line-height: 2.5; " class="w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
+        <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">Price summary</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">Price summary</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">NYC - SFO</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">SFO - NYC</a>
+        </div>
+        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" ng-app="travelhunt">
+            <div class="w3-row" ng-controller=AncillarySelection>
+                <div class="w3-col m3">
+                    <div class="w3-card w3-round">
+                        <div class="w3-white">
+                            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> Price summary</button>
+                            <div id="Demo1" class="w3-hide w3-container">
+                                <div class=" flight-details-overlay" >
+
+                                    <div class="overlay-content">
+
+                                        <div class=" row itinerary-details">
+                                            <div class="row fare-summary-rules" >
+                                                <div class="one-fourth" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
+                                                    <div class="insert-content">
+                                                        <table class="fareSummary" width="100%" cellspacing="0" cellpadding="0" style="position:relative;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="4">
+                                                                        <h3 class="bold">Fare Summary</h3>
+                                                                    </th>
+                                                                    <th class="tr bold" >ADT x1</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="firstTR">
+
+                                                                <tr class="detailtax">
+                                                                    <td colspan="4"> Base Fare </td>
+                                                                    <td class="tr pax_1">{{tripdetails.basefare}} <i class="rs">{{tripdetails.currency}}</i></td>
+
+                                                                </tr>
+                                                                <tr class="detailtax">
+                                                                    <td colspan="4"> Taxes </td>
+                                                                    <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                            <tbody class="detailtax bg-grey">
+                                                                <tr class="">
+                                                                    <td colspan="4" class="bold no-border"> Total </td>
+                                                                    <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                                </tr>
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> NYC - SFO | AS - 1193</button>
+                            <div id="Demo2" class="w3-hide">
+                                <div class="flight-info-container flight-details-overlay" >
+                                    <div class="overlay-content">
+                                        <div class=" row itinerary-details">
+                                            <div >
+                                                <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
+                                                    <li class="trip-type">
+                                                        <i class="ytfi-clock-1 ">&nbsp;</i>
+                                                        <time>
+                                                            {{firstLeg.arrivalTime}}
+                                                        </time>
+                                                        <span class="pipe">|</span>
+                                                        <span > {{firstLeg.travelType}}</span>
+
+                                                        <span class="pipe"> | </span>
+                                                        <span>{{firstLeg.destination}}</span>
+                                                        <div class="air-journey">
+                                                            <span class="fl">&nbsp;</span>
+                                                            <i class=""></i>
+                                                            <span class="fr">&nbsp;</span>
+                                                        </div>
+                                                        <h4 class="">
+                                                            <span class="ref-ui"> {{firstLeg.cabinType}} &nbsp;</span>
+                                                            <span >
+                                                                <span class="pipe"> | </span>
+                                                                <span class="ref-ui">Refundable</span>
+                                                            </span>
+                                                        </h4>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> SFO - NYC  |  AS - 1193</button>
+                            <div id="Demo3" class="w3-hide w3-container">
+                                <div class="flight-info-container flight-details-overlay" >
+
+                                    <div class="overlay-content">
+
+                                        <div class=" row itinerary-details">
+
+                                            <div >
+                                                <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
+                                                    <li class="trip-type">
+                                                        <i class="ytfi-clock-1 ">&nbsp;</i>
+                                                        <time>
+                                                            06h 46m
+                                                        </time>
+                                                        <span class="pipe">|</span>
+                                                        <span > Non Stop</span>
+
+                                                        <span class="pipe"> | </span>
+                                                        <span>Free Meals</span>
+                                                        <div class="air-journey">
+                                                            <span class="fl">&nbsp;</span>
+                                                            <i class=""></i>
+                                                            <span class="fr">&nbsp;</span>
+                                                        </div>
+                                                        <h4 class="">
+                                                            <span class="ref-ui"> Economy Class &nbsp;</span>
+                                                            <span >
+                                                                <span class="pipe"> | </span>
+                                                                <span class="ref-ui">Refundable</span>
+                                                            </span>
+                                                        </h4>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <table class="w3-table-all">
+                                    <tr class="w3-green">
+                                        <th></th>
+                                        <th>Ancillary</th>
+                                        <th>Actual Price</th>
+                                        <th>Discount Price</th>
+                                    </tr>
+                                    <tr ng-repeat="ancillary in myData.data.ancillaries">
+                                        <td><input type="checkbox" ng-model="ancillary[0]"></td>
+                                        <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
+                                        <td>{{ancillary[2]}}%</td>
+                                        <td>{{ancillary[3]}}%</td>
+                                    </tr>
+                                </table>
+                                <hr>
+                                <code class="w3-codespan">
+                                    Select any ancillery to start the game.
+                                    Upon completion we get discount based on the gamepoints
+                                </code>
+                                <hr>
+                                <p><button class="w3-button w3-green w3-third" ng-click="startGame()">Start Game</button></p>
+
+
+								
+                                <div  id="apartment">
+                                    <h4 class="w3-text-green">Welcome to the game</h4>
+                                    <div class="w3-display-container mySlides">
+                                        <img src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+                                        <div class="w3-display-bottomleft w3-container w3-black">
+                                            <p>Dest-1 15points</p>
+                                        </div>
+                                    </div>
+                                    <div class="w3-display-container mySlides">
+                                        <img src="images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+                                        <div class="w3-display-bottomleft w3-container w3-black">
+                                            <p>Dest-2 25points</p>
+                                        </div>
+                                    </div>
+                                    <div class="w3-display-container mySlides">
+                                        <img src="images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+                                        <div class="w3-display-bottomleft w3-container w3-black">
+                                            <p>Dest-3 5points</p>
+                                        </div>
+                                    </div>
+                                    <div class="w3-display-container mySlides">
+                                        <img src="images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+                                        <div class="w3-display-bottomleft w3-container w3-black">
+                                            <p>Dest-4 55points</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w3-row-padding w3-section">
+                                    <div class="w3-col s3">
+                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
+                                    </div>
+                                    <div class="w3-col s3">
+                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/diningroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
+                                    </div>
+                                    <div class="w3-col s3">
+                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/bedroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
+                                    </div>
+                                    <div class="w3-col s3">
+                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
+                                    </div>
+                                </div>
+
+
+                                <hr>
+
+                            </div>
+                        </div>      
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <footer class="w3-container w3-theme-d3 w3-padding-16 w3-hide">
+            <h5>Footer</h5>
+        </footer>
+        <script>
+            // Accordion
+            function myFunction(id) {
+                var x = document.getElementById(id);
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                    x.previousElementSibling.className += " w3-theme-d1";
+                } else {
+                    x.className = x.className.replace("w3-show", "");
+                    x.previousElementSibling.className =
+                            x.previousElementSibling.className.replace(" w3-theme-d1", "");
+                }
+            }
+
+            // Used to toggle the menu on smaller screens when clicking on the menu button
+            function openNav() {
+                var x = document.getElementById("navDemo");
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+
+        </script>
+        <script>
+            // Script to open and close sidebar when on tablets and phones
+            function w3_open() {
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("myOverlay").style.display = "block";
+            }
+
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
+
+            // Slideshow Apartment Images
+            var slideIndex = 1;
+            showDivs(slideIndex);
+
+            function plusDivs(n) {
+                showDivs(slideIndex += n);
+            }
+
+            function currentDiv(n) {
+                showDivs(slideIndex = n);
+            }
+
+            function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("demo");
+                if (n > x.length) {
+                    slideIndex = 1
+                }
+                if (n < 1) {
+                    slideIndex = x.length
+                }
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+                }
+                x[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " w3-opacity-off";
+            }
+        </script>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
+        
+        <script type="text/javascript">
+			var app = angular.module('travelhunt', []);
+			app.controller('AncillarySelection', function($scope, $http) {
+	
+				angular.element(document).ready(function() {
+
+                    $http.get("/retrieve/mock/trips?orderId=1").then(function(response){
+                       $scope.tripdetails = response.data.retriveRateDetails;
+                        $scope.firstLeg = response.data.firstLeg;
+                        $scope.secondLeg = response.data.secondLeg;
+                        var arrDate = $scope.firstLeg.arrivalTime;
+                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
+                    });
+
+					$http.get('/content.json').then(function(response) {
+						$scope.myData = response;
+					});
+				});
+				
+				$scope.startGame = function() {
+					$scope.myData.data;
+				}
+			});
+		</script>
+    </body>
+</html> 

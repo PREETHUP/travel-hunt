@@ -20,13 +20,13 @@ public class MainController {
     @Autowired
     private Configuration configuration;
 
-    @RequestMapping(value="/",method = RequestMethod.GET)
-    public String homepage(){
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String homepage() {
         return "Landing";
     }
 
-    @RequestMapping(value="/update/discount",method = RequestMethod.GET)
-    public String updateDiscount(@RequestParam(value = "value") String discount){
+    @RequestMapping(value = "/update/discount", method = RequestMethod.GET)
+    public String updateDiscount(@RequestParam(value = "value") String discount) {
         configuration.discount = Integer.parseInt(discount);
         log.info(String.valueOf(configuration.discount));
         return "index";
