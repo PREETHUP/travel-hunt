@@ -19,10 +19,17 @@ public class UserAncillaryService {
         return userAncillaryResponse;
     }
 
-    public UserAncillaryResponse retrieveAirAncillaryDetails(){
+    public UserAncillaryResponse retrieveAirlineAncillaryDetails(){
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
         userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         return userAncillaryResponse;
+    }
+
+    public UserAncillaryResponse retrieveAirAncillaryDetailsWithApiCall(){
+        //do Service call
+        //update the Air Ancillary list
+        // generate ancillary list
+        return new UserAncillaryResponse();
     }
 
     public void updateUserAncillary(Integer tasksFinished, Integer totalTasks) {
