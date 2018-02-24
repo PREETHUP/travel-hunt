@@ -97,12 +97,12 @@ public class GetServiceListService extends NDCService {
 
         GetServiceListService listService = new GetServiceListService();
         ServiceListRequest req = new ServiceListRequest();
-        req.setOdId(view.getOds().get(0).getReferenceKey());
-        req.setFlight(view.getOds().get(0).getFlights().get(0));
+        req.setOdId(view.getOds().get(1).getReferenceKey());
+        req.setFlight(view.getOds().get(1).getFlights().get(0));
         ServiceList list = listService.getServices(req);
         System.out.println("done");
-    }*/
-
+    }
+*/
     public ServiceList getServices(ServiceListRequest req) {
 
 

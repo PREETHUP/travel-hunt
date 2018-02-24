@@ -19,6 +19,7 @@ public class Flight {
     private String flightNumber;
     private String bookingCode;
     private String cabinClass;
+    private String cabinCode;
     private int flightDuration;
     private int numberOfStops;
 
@@ -26,6 +27,14 @@ public class Flight {
     private String fareBasis;
     private String fareAugKey;
     private final List<String> otherAugKeys = new ArrayList<>();
+
+    public String getCabinCode() {
+        return cabinCode;
+    }
+
+    public void setCabinCode(String cabinCode) {
+        this.cabinCode = cabinCode;
+    }
 
     public String getFareAugKey() {
         return fareAugKey;

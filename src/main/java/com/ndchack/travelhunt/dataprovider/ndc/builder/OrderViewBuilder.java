@@ -78,7 +78,7 @@ public class OrderViewBuilder {
                 if (date != null && time != null) {
 
                     flight.setDepartureTime(
-                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
+                            DateTime.parse(date.substring(0, date.length()) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
                 }
 
                 for (JAXBElement<?> obj : orderFlight.getArrival().getRest()) {
@@ -97,13 +97,14 @@ public class OrderViewBuilder {
                 if (date != null && time != null) {
 
                     flight.setArrivalTime(
-                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
+                            DateTime.parse(date.substring(0, date.length()) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
                 }
 
                 flight.setMarketingCarrier(orderFlight.getMarketingCarrier().getAirlineID().getValue());
                 flight.setFlightNumber(orderFlight.getMarketingCarrier().getFlightNumber().getValue());
                 flight.setBookingCode(orderFlight.getClassOfService().getCode().getValue());
                 flight.setCabinClass(orderFlight.getCabinType().getName());
+                flight.setCabinCode(orderFlight.getCabinType().getCode());
                 javax.xml.datatype.Duration timeField = orderFlight.getDetails().getFlightDuration().getValue();
                 flight.setFlightDuration(timeField.getHours() * 60 + timeField.getMinutes());
                 flight.setNumberOfStops(0);

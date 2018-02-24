@@ -35,38 +35,38 @@ public class ServiceReqBuilder {
 
         ServiceListRQ.Query.OriginDestination od = new ServiceListRQ.Query.OriginDestination();
         query.getOriginDestination().add(od);
-//        od.setOriginDestinationKey(req.getOdId());
-        od.setOriginDestinationKey("XQ_OD_1494289486264");
+        od.setOriginDestinationKey(req.getOdId());
+        //od.setOriginDestinationKey("XQ_OD_1494289486264");
 
         FlightType.Flight flight = new FlightType.Flight();
         od.getFlight().add(flight);
 
         Flight reqFlight = req.getFlight();
-        //flight.setSegmentKey(reqFlight.getSegmentKey());
-        flight.setSegmentKey("XQ_SEG_1494289486269");
+        flight.setSegmentKey(reqFlight.getSegmentKey());
+        //flight.setSegmentKey("XQ_SEG_1494289486269");
 
 
         Departure departure = new Departure();
         flight.setDeparture(departure);
 
         FlightDepartureType.AirportCode airport = new FlightDepartureType.AirportCode();
-//        airport.setValue(reqFlight.getDepartureAirport());
-        airport.setValue("FRA");
+        airport.setValue(reqFlight.getDepartureAirport());
+        //airport.setValue("FRA");
         JAXBElement<FlightDepartureType.AirportCode> airportCode = new JAXBElement<FlightDepartureType.AirportCode>(new QName("http://www.iata.org/IATA/EDIST","AirportCode"), FlightDepartureType.AirportCode.class, airport);
         departure.getRest().add(airportCode);
 
         XMLGregorianCalendarImpl cal = new XMLGregorianCalendarImpl();
-//        cal.setYear(reqFlight.getDepartureTime().getYear());
-//        cal.setMonth(reqFlight.getDepartureTime().getMonthOfYear());
-//        cal.setDay(reqFlight.getDepartureTime().getDayOfMonth());
-        cal.setYear(2018);
-        cal.setMonth(3);
-        cal.setDay(18);
+        cal.setYear(reqFlight.getDepartureTime().getYear());
+        cal.setMonth(reqFlight.getDepartureTime().getMonthOfYear());
+        cal.setDay(reqFlight.getDepartureTime().getDayOfMonth());
+        //cal.setYear(2018);
+        //cal.setMonth(3);
+        //cal.setDay(18);
         JAXBElement<XMLGregorianCalendar> departureDateJaxb = new JAXBElement<XMLGregorianCalendar>(new QName("http://www.iata.org/IATA/EDIST","Date"), XMLGregorianCalendar.class, cal);
         departure.getRest().add(departureDateJaxb);
 
-        //JAXBElement<String> timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, reqFlight.getDepartureTime().getHourOfDay() + ":" + reqFlight.getDepartureTime().getMinuteOfHour());
-        JAXBElement<String> timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, "14:30");
+        JAXBElement<String> timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, reqFlight.getDepartureTime().getHourOfDay() + ":" + reqFlight.getDepartureTime().getMinuteOfHour());
+        //JAXBElement<String> timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, "14:30");
         departure.getRest().add(timeJaxb);
 
 
@@ -74,23 +74,23 @@ public class ServiceReqBuilder {
         flight.setArrival(arrival);
 
         FlightArrivalType.AirportCode aairport = new FlightArrivalType.AirportCode();
-        //aairport.setValue(reqFlight.getArrivalAirport());
-        aairport.setValue("AYT");
+        aairport.setValue(reqFlight.getArrivalAirport());
+        //aairport.setValue("AYT");
         JAXBElement<FlightArrivalType.AirportCode> aairportCode = new JAXBElement<FlightArrivalType.AirportCode>(new QName("http://www.iata.org/IATA/EDIST","AirportCode"), FlightArrivalType.AirportCode.class, aairport);
         arrival.getRest().add(aairportCode);
 
         cal = new XMLGregorianCalendarImpl();
-        /*cal.setYear(reqFlight.getArrivalTime().getYear());
+        cal.setYear(reqFlight.getArrivalTime().getYear());
         cal.setMonth(reqFlight.getArrivalTime().getMonthOfYear());
-        cal.setDay(reqFlight.getArrivalTime().getDayOfMonth());*/
-        cal.setYear(2018);
-        cal.setMonth(3);
-        cal.setDay(18);
+        cal.setDay(reqFlight.getArrivalTime().getDayOfMonth());
+        //cal.setYear(2018);
+        //cal.setMonth(3);
+        //cal.setDay(18);
         JAXBElement<XMLGregorianCalendar> arrivalDateJaxb = new JAXBElement<XMLGregorianCalendar>(new QName("http://www.iata.org/IATA/EDIST","Date"), XMLGregorianCalendar.class, cal);
         arrival.getRest().add(departureDateJaxb);
 
-//        timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, reqFlight.getArrivalTime().getHourOfDay() + ":" + reqFlight.getArrivalTime().getMinuteOfHour());
-        timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, "19:55");
+        timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, reqFlight.getArrivalTime().getHourOfDay() + ":" + reqFlight.getArrivalTime().getMinuteOfHour());
+        //timeJaxb = new JAXBElement<String>(new QName("http://www.iata.org/IATA/EDIST","Time"), String.class, "19:55");
         arrival.getRest().add(timeJaxb);
 
         MarketingCarrierFlightType markCarrier = new MarketingCarrierFlightType();
@@ -100,8 +100,8 @@ public class ServiceReqBuilder {
         markCarrier.setAirlineID(id);
         FlightNumber no =  new FlightNumber();
         markCarrier.setFlightNumber(no);
-//        no.setValue(reqFlight.getFlightNumber());
-        no.setValue("141");
+        no.setValue(reqFlight.getFlightNumber());
+        //no.setValue("141");
 
         AircraftSummaryType summary = new AircraftSummaryType();
         flight.setEquipment(summary);
@@ -112,9 +112,9 @@ public class ServiceReqBuilder {
 
         CabinType cabinType = new CabinType();
         flight.setCabinType(cabinType);
-        cabinType.setCode("L");
+        //cabinType.setCode("L");
         cabinType.setName("ECONOMY");
-        //cabinType.setCode(reqFlight.getBookingCode());
+        cabinType.setCode(reqFlight.getBookingCode());
 
 
 
@@ -127,10 +127,10 @@ public class ServiceReqBuilder {
         stops.setStopQuantity(BigInteger.ZERO);
         FlightDurationType durationType = new FlightDurationType();
         DatatypeFactoryImpl impl = new DatatypeFactoryImpl();
-//        int hour = reqFlight.getFlightDuration()/60;
-//        int minute = reqFlight.getFlightDuration()%60;
-        int hour = 1;
-        int minute = 10;
+        int hour = reqFlight.getFlightDuration()/60;
+        int minute = reqFlight.getFlightDuration()%60;
+        //int hour = 1;
+        //int minute = 10;
         Duration duration = impl.newDuration(true, 0, 0, 0, hour, minute, 0);
         durationType.setValue(duration);
         detailsType.setFlightDuration(durationType);
@@ -151,18 +151,18 @@ public class ServiceReqBuilder {
         metadataType.setAugmentationPoint(augPointInfoType);
         AugPointType augPointType = new AugPointType();
         augPointInfoType.getAugPoint().add(augPointType);
-        //augPointType.setKey(reqFlight.getFareAugKey());
-        augPointType.setKey("XQ_FMD_1494289486271");
+        augPointType.setKey(reqFlight.getFareAugKey());
+        //augPointType.setKey("XQ_FMD_1494289486271");
         FareDetailAugPoint augPoint = new FareDetailAugPoint();
         augPointType.setAny(augPoint);
-//        augPoint.setFareBasis(reqFlight.getFareBasis());
-//        augPoint.setFareLevel(reqFlight.getFareLevel());
-        augPoint.setFareBasis("ST");
-        augPoint.setFareLevel("SUNECO");
+        augPoint.setFareBasis(reqFlight.getFareBasis());
+        augPoint.setFareLevel(reqFlight.getFareLevel());
+        //augPoint.setFareBasis("ST");
+        //augPoint.setFareLevel("SUNECO");
 
         AugPointType flightAugType = new AugPointType();
-//        flightAugType.setKey(reqFlight.getFareAugKey());
-        flightAugType.setKey("XQ_FMD_1494289486271");
+        flightAugType.setKey(reqFlight.getFareAugKey());
+        //flightAugType.setKey("XQ_FMD_1494289486271");
         flight.getRefs().add(flightAugType);
 
 
