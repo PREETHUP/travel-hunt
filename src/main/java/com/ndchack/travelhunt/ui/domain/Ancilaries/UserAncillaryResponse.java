@@ -8,6 +8,8 @@ import java.util.List;
 public class UserAncillaryResponse {
 
     private List<UserAncillaryDetail> userAncillaryDetails;
+    private String stage;
+
 
     public List<UserAncillaryDetail> getUserAncillaryDetails() {
         return userAncillaryDetails;
@@ -15,5 +17,13 @@ public class UserAncillaryResponse {
 
     public void setUserAncillaryDetails(List<UserAncillaryDetail> userAncillaryDetails) {
         this.userAncillaryDetails = userAncillaryDetails;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 }
