@@ -42,7 +42,7 @@
                                             <div class="row fare-summary-rules" >
                                                 <div class="one-fourth" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
                                                     <div class="insert-content">
-                                                        
+
                                                         <table class="w3-table-all w3-card-4">
                                                             <tr>
                                                                 <th><p>Fare Summary</p></th>
@@ -54,19 +54,19 @@
                                                             </tr>
                                                             <tr>
                                                                 <td><p><i class="fa fa-fw fa-wheelchair"></i> Taxes</p></td>
-                                                                 <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                                <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
                                                             </tr>
                                                             <tr class="w3-grey" style="
                                                                 color: white !important;
                                                                 background-color: #d87b7b!important;
                                                                 ">
                                                                 <td><p><i class="fa fa-fw fa-cutlery"></i> Total</p></td>
-                                                                 <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                                <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
                                                             </tr>
                                                         </table>
-                                                        
-                                                        
-                                                       
+
+
+
                                                     </div>
                                                 </div>
 
@@ -115,66 +115,66 @@
                             <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> SFO - NYC  |  AS - 1193</button>
                             <div id="Demo3" class="w3-hide w3-container">
                                 <div class="hide-my-non-game-div"> 
-                                <div class="flight-info-container flight-details-overlay" >
+                                    <div class="flight-info-container flight-details-overlay" >
 
-                                    <div class="overlay-content">
+                                        <div class="overlay-content">
 
-                                        <div class=" row itinerary-details">
+                                            <div class=" row itinerary-details">
 
-                                            <div >
-                                                <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
-                                                    <li class="trip-type">
-                                                        <i class="ytfi-clock-1 ">&nbsp;</i>
-                                                        <time>
-                                                            06h 46m
-                                                        </time>
-                                                        <span class="pipe">|</span>
-                                                        <span > Non Stop</span>
+                                                <div >
+                                                    <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
+                                                        <li class="trip-type">
+                                                            <i class="ytfi-clock-1 ">&nbsp;</i>
+                                                            <time>
+                                                                06h 46m
+                                                            </time>
+                                                            <span class="pipe">|</span>
+                                                            <span > Non Stop</span>
 
-                                                        <span class="pipe"> | </span>
-                                                        <span>Free Meals</span>
-                                                        <div class="air-journey">
-                                                            <span class="fl">&nbsp;</span>
-                                                            <i class=""></i>
-                                                            <span class="fr">&nbsp;</span>
-                                                        </div>
-                                                        <h4 class="">
-                                                            <span class="ref-ui"> Economy Class &nbsp;</span>
-                                                            <span >
-                                                                <span class="pipe"> | </span>
-                                                                <span class="ref-ui">Refundable</span>
-                                                            </span>
-                                                        </h4>
-                                                    </li>
-                                                </ul>
+                                                            <span class="pipe"> | </span>
+                                                            <span>Free Meals</span>
+                                                            <div class="air-journey">
+                                                                <span class="fl">&nbsp;</span>
+                                                                <i class=""></i>
+                                                                <span class="fr">&nbsp;</span>
+                                                            </div>
+                                                            <h4 class="">
+                                                                <span class="ref-ui"> Economy Class &nbsp;</span>
+                                                                <span >
+                                                                    <span class="pipe"> | </span>
+                                                                    <span class="ref-ui">Refundable</span>
+                                                                </span>
+                                                            </h4>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
 
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
 
 
-                                <table class="w3-table-all w3-card-4">
-                                    <tr class="w3-green">
-                                        <th></th>
-                                        <th>Ancillary</th>
-                                        <th>Actual Price</th>
-                                        <th>Discount Price</th>
-                                    </tr>
-                                    <tr ng-repeat="ancillary in myData.data.ancillaries">
-                                        <td><input type="checkbox" ng-model="ancillary[0]"></td>
-                                        <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
-                                        <td>{{ancillary[2]}}%</td>
-                                        <td>{{ancillary[3]}}%</td>
-                                    </tr>
-                                </table>
-                                <hr>
-                                <code class="w3-codespan">
-                                    Select any ancillery to start the game.
-                                    Upon completion we get discount based on the gamepoints
-                                </code>
-                                <hr>
+                                    <table class="w3-table-all w3-card-4">
+                                        <tr class="w3-green">
+                                            <th></th>
+                                            <th>Ancillary</th>
+                                            <th>Actual Price</th>
+                                            <th>Discount Price</th>
+                                        </tr>
+                                        <tr ng-repeat="ancillary in myData.data.ancillaries">
+                                            <td><input type="checkbox" ng-model="ancillary[0]"></td>
+                                            <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
+                                            <td>{{ancillary[2]}}%</td>
+                                            <td>{{ancillary[3]}}%</td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <code class="w3-codespan">
+                                        Select any ancillery to start the game.
+                                        Upon completion we get discount based on the gamepoints
+                                    </code>
+                                    <hr>
                                     <p ><button style="
                                                 margin-top: -10%;
                                                 " class="w3-button w3-green w3-third" onclick="startGame()">Start Game</button></p>
@@ -183,59 +183,59 @@
                                 <div class="show-my-game-div" style="display: none">
 
                                     <div  id="apartment"  >
-                                        <h5 class="w3-text-green">Welcome to the game</h5>
-                                        <h6 class="w3-text-green">Ancillery wifi -> 150pts</h6>
+                                        <h5 class="w3-text-green" style=" padding-left: 12%; font-size: 20px; font-weight: 900; font-family: sans-serif; text-decoration: underline; ">Welcome to the game</h5>
+                                        <h6 class="w3-text-blue">Ancillery wifi -> 150pts</h6>
                                         <div class="w3-display-container mySlides  w3-card-4">
-                                            <img class="w3-opacity-max" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
-                                        <div class="w3-display-bottomleft w3-container w3-black">
-                                            <p>Dest-1 15points</p>
+                                            <img id="img_1_" class="w3-opacity-max" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+                                            <div class="w3-display-bottomleft w3-container w3-black">
+                                                <p>Dest-1 15points</p>
+                                            </div>
+                                        </div>
+                                        <div class="w3-display-container mySlides">
+                                            <img id="img_2" src="images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+                                            <div class="w3-display-bottomleft w3-container w3-black">
+                                                <p>Dest-2 25points</p>
+                                            </div>
+                                        </div>
+                                        <div class="w3-display-container mySlides">
+                                            <img id="img_3" src="images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+                                            <div class="w3-display-bottomleft w3-container w3-black">
+                                                <p>Dest-3 5points</p>
+                                            </div>
+                                        </div>
+                                        <div class="w3-display-container mySlides">
+                                            <img id="img_4" src="images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+                                            <div class="w3-display-bottomleft w3-container w3-black">
+                                                <p>Dest-4 55points</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="w3-display-container mySlides">
-                                        <img src="images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
-                                        <div class="w3-display-bottomleft w3-container w3-black">
-                                            <p>Dest-2 25points</p>
+                                    <div class="w3-row-padding w3-section">
+                                        <div class="w3-col s3">
+                                            <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
+                                        </div>
+                                        <div class="w3-col s3">
+                                            <img class="demo w3-opacity w3-hover-opacity-off" src="images/diningroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
+                                        </div>
+                                        <div class="w3-col s3">
+                                            <img class="demo w3-opacity w3-hover-opacity-off" src="images/bedroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
+                                        </div>
+                                        <div class="w3-col s3">
+                                            <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
                                         </div>
                                     </div>
-                                    <div class="w3-display-container mySlides">
-                                        <img src="images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
-                                        <div class="w3-display-bottomleft w3-container w3-black">
-                                            <p>Dest-3 5points</p>
-                                        </div>
-                                    </div>
-                                    <div class="w3-display-container mySlides">
-                                        <img src="images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
-                                        <div class="w3-display-bottomleft w3-container w3-black">
-                                            <p>Dest-4 55points</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w3-row-padding w3-section">
-                                    <div class="w3-col s3">
-                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
-                                    </div>
-                                    <div class="w3-col s3">
-                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/diningroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
-                                    </div>
-                                    <div class="w3-col s3">
-                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/bedroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
-                                    </div>
-                                    <div class="w3-col s3">
-                                        <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
-                                    </div>
-                                </div>
 
 
-                                <hr>
+                                    <hr>
                                     <div class="w3-light-grey w3-round-large show-my-div" style="margin-bottom: 10px;display: none" >
-                                        <div class="w3-container w3-blue w3-round-large" style="width:25%">1/5</div>
+                                        <div class="w3-container w3-blue w3-round-large" id="setProgressValue" style="width:25%">1/5</div>
                                     </div>
-                                    <button class="w3-button w3-purple" onclick="startTimer();">Tag my location</button>
+                                    <button id="tag_location" class="w3-button w3-purple" onclick="startTimer();" style="display: none;">Tag my location</button>
                                     <hr>
 
-                            </div>
-                        </div>      
-                    </div>
+                                </div>
+                            </div>      
+                        </div>
                     </div>
                     <br>
 
@@ -253,7 +253,7 @@
                             <p>Verifying the location</p>
                             <p style="padding-left: 10%;"><i class="fa fa-spinner w3-spin" style="font-size:48px;"></i></p>
                             <p>please wait ....</p>
-        </div>
+                        </div>
                         <div class="show-my-div" style="display: none;padding: 9%;padding-top: 10px">
 
                             <div class="w3-panel w3-green w3-round-large" style="height: 117px;width: 268px;">
@@ -274,141 +274,168 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous">
         </script>
         <script>
+            $(document).ready(function () {
+            storeImgIds = [];
+            localStorage.setItem('setImageSelection', JSON.stringify(storeImgIds));
+            $('.mySlides img').on('click', function () {
+            $('.mySlides img').each(function (elem) {
+            $(this).removeClass('selected')
+            })
+                    $(this).addClass('selected');
+            var getId = this.id;
+            $('#tag_location').show();
+            })
+            });
+        </script>
+        <script>
             // Accordion
-            alert('sss')
             function startGame(id) {
-                $('.show-my-game-div').show();
-                $('.hide-my-non-game-div').hide();
+            $('.show-my-game-div').show();
+            $('.hide-my-non-game-div').hide();
             }
             function myFunction(id) {
-                var x = document.getElementById(id);
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                    x.previousElementSibling.className += " w3-theme-d1";
-                } else {
-                    x.className = x.className.replace("w3-show", "");
-                    x.previousElementSibling.className =
-                            x.previousElementSibling.className.replace(" w3-theme-d1", "");
-                }
+            var x = document.getElementById(id);
+            if (x.className.indexOf("w3-show") == - 1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-theme-d1";
+            } else {
+            x.className = x.className.replace("w3-show", "");
+            x.previousElementSibling.className =
+                    x.previousElementSibling.className.replace(" w3-theme-d1", "");
+            }
             }
             function startTimer(id) {
-                $('#id01').show();
-                $('.hide-my-div').show();
-                $('.show-my-div').hide();
-                function showPosition(position) {
-                    var prepareCoordinates = "Latitude: " + position.coords.latitude +
-                            "<br>Longitude: " + position.coords.longitude;
-                    $('.hide-my-div').fadeOut();
-                    $('.show-my-div').fadeIn();
-                    $('.show-my-div-p').html(prepareCoordinates)
-
-                }
-
-
-                setTimeout(function () {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showPosition);
-                    } else {
-                        $('.hide-my-div').fadeOut();
-                        $('.show-my-div').fadeIn();
-                        $('.show-my-div').html('Geolocation is not supported by this browser.')
-                    }
-                }, 1000);
+            var getSelectedImg = $('.mySlides img.selected').attr('id');
+            if (!($.inArray(getSelectedImg, storeImgIds) > - 1)) {
+            storeImgIds.push(getSelectedImg);
+            localStorage.setItem('setImageSelection', JSON.stringify(storeImgIds));
+            $('#id01').show();
+            $('.hide-my-div').show();
+            $('.show-my-div').hide();
+            function showPosition(position) {
+            var prepareCoordinates = "Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+            $('.hide-my-div').fadeOut();
+            var getImgsIds = localStorage.getItem('setImageSelection');
+            if (getImgsIds && getImgsIds !== 'null') {
+            var getArray = JSON.parse(getImgsIds);
+            var prepareProgress = getArray.length + '/' + $('.mySlides img').length;
+            var arrlen = getArray.length;
+            var slideLen = $('.mySlides img').length;
+            var calculation = parseFloat(arrlen / slideLen) * 100;
+            $('#setProgressValue').css({width: calculation + '%'})
+                    $('#setProgressValue').html(prepareProgress);
+            }
+            $('.show-my-div').fadeIn();
+            $('.show-my-div-p').html(prepareCoordinates)
+            }
+            setTimeout(function () {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            $('.hide-my-div').fadeOut();
+            $('.show-my-div').fadeIn();
+            $('.show-my-div').html('Geolocation is not supported by this browser.')
+            }
+            }, 1000);
+            } else {
+            alert('Location already completed');
+            }
             }
 
             // Used to toggle the menu on smaller screens when clicking on the menu button
             function openNav() {
-                var x = document.getElementById("navDemo");
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                } else {
-                    x.className = x.className.replace(" w3-show", "");
-                }
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == - 1) {
+            x.className += " w3-show";
+            } else {
+            x.className = x.className.replace(" w3-show", "");
+            }
             }
 
         </script>
         <script>
             // Script to open and close sidebar when on tablets and phones
             function w3_open() {
-                document.getElementById("mySidebar").style.display = "block";
-                document.getElementById("myOverlay").style.display = "block";
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
             }
 
             function w3_close() {
-                document.getElementById("mySidebar").style.display = "none";
-                document.getElementById("myOverlay").style.display = "none";
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
             }
 
             // Slideshow Apartment Images
             var slideIndex = 1;
             showDivs(slideIndex);
-
             function plusDivs(n) {
-                showDivs(slideIndex += n);
+            showDivs(slideIndex += n);
             }
 
             function currentDiv(n) {
-                showDivs(slideIndex = n);
+            $('#tag_location').show();
+            $('.mySlides img').each(function (elem) {
+            $(this).removeClass('selected')
+            })
+                    $($('.mySlides img:eq(' + n + ')')[0]).addClass('selected');
+            showDivs(slideIndex = n);
             }
 
             function showDivs(n) {
-                var i;
-                var x = document.getElementsByClassName("mySlides");
-                var dots = document.getElementsByClassName("demo");
-                if (n > x.length) {
-                    slideIndex = 1
-                }
-                if (n < 1) {
-                    slideIndex = x.length
-                }
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.display = "none";
-                }
-                for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-                }
-                x[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " w3-opacity-off";
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) {
+            slideIndex = 1
+            }
+            if (n < 1) {
+            slideIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-opacity-off";
             }
         </script>
         <script>
             var acc = document.getElementsByClassName("accordion");
             var i;
-
             for (i = 0; i < acc.length; i++) {
-                acc[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var panel = this.nextElementSibling;
-                    if (panel.style.display === "block") {
-                        panel.style.display = "none";
-                    } else {
-                        panel.style.display = "block";
-                    }
-                });
+            acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+            panel.style.display = "none";
+            } else {
+            panel.style.display = "block";
+            }
+            });
             }
         </script>
-        
+
         <script type="text/javascript">
-			var app = angular.module('travelhunt', []);
-			app.controller('AncillarySelection', function($scope, $http) {
-	
-				angular.element(document).ready(function() {
+            var app = angular.module('travelhunt', []);
+            app.controller('AncillarySelection', function($scope, $http) {
 
-                    $http.get("/retrieve/mock/trips?orderId=1").then(function(response){
-                       $scope.tripdetails = response.data.retriveRateDetails;
-                        $scope.firstLeg = response.data.firstLeg;
-                        $scope.secondLeg = response.data.secondLeg;
-                        var arrDate = $scope.firstLeg.arrivalTime;
+            angular.element(document).ready(function() {
+
+            $http.get("/retrieve/mock/trips?orderId=1").then(function(response){
+            $scope.tripdetails = response.data.retriveRateDetails;
+            $scope.firstLeg = response.data.firstLeg;
+            $scope.secondLeg = response.data.secondLeg;
+            var arrDate = $scope.firstLeg.arrivalTime;
 //                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
-                    });
-
-					$http.get('/content.json').then(function(response) {
-						$scope.myData = response;
-					});
-				});
-				
-				
-			});
-		</script>
+            });
+            $http.get('/content.json').then(function(response) {
+            $scope.myData = response;
+            });
+            });
+            });
+        </script>
     </body>
 </html> 
