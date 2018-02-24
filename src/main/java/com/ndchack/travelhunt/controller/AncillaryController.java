@@ -49,7 +49,7 @@ public class AncillaryController {
 
     @RequestMapping(value="/get/mock/ancillaries",method = RequestMethod.GET)
     public UserAncillaryResponse getmockAirAncillary(){
-        return userAncillaryService.retrieveAirAncillaryDetails();
+        return userAncillaryService.retrieveAirlineAncillaryDetails();
     }
 
 
