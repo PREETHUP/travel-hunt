@@ -2,6 +2,9 @@ package com.ndchack.travelhunt.dataprovider.ndc.model;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by A-2174 on 2/24/18.
  */
@@ -21,6 +24,22 @@ public class Flight {
     private String fareReference;
     private String fareLevel;
     private String fareBasis;
+    private String fareAugKey;
+    private final List<String> otherAugKeys = new ArrayList<>();
+
+    public String getFareAugKey() {
+        return fareAugKey;
+    }
+
+    public void setFareAugKey(String fareAugKey) {
+        this.fareAugKey = fareAugKey;
+    }
+
+
+
+    public List<String> getOtherAugKeys() {
+        return otherAugKeys;
+    }
 
     public String getFareLevel() {
         return fareLevel;
