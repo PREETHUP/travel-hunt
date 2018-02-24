@@ -1,0 +1,7 @@
+{
+	"ancillaries": [
+		[true, "Extra Legroom", 15, 10],
+		[false, "Priority Boarding", 10, 5],
+		[false, "Fast Track", 5, 2]
+	]
+}
