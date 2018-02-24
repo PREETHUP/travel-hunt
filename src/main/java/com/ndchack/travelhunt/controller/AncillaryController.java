@@ -24,7 +24,7 @@ public class AncillaryController {
 
     }
 
-    @RequestMapping(value="/list/ancillaries",method = RequestMethod.POST)
+    @RequestMapping(value="/list/ancillaries",method = RequestMethod.GET)
     public UserAncillaryResponse getAncillaryList(){
         return userAncillaryService.getAncillaryResponse();
     }

@@ -45,6 +45,7 @@ public class ScheduledJob {
         log.info("Checking if we should trigger the notification.");
         if (returnDepartureTime.compareTo(currentTime) == 0 && stop != true) {
             stop = true;
+            Configuration.gameStage = "2";
             log.info("Completed!!");
             postProcessor.destroy();
         }
