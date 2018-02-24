@@ -13,7 +13,7 @@ import org.iata.iata.edist.OrderViewRS;
  */
 public class GetOrderService {
 
-    public OrderView getOrder(String locatorCode) {
+    public static OrderView getOrder(String locatorCode) {
 
         OrderRetrieveRQ rq = createRequest(locatorCode);
         try {
@@ -28,7 +28,7 @@ public class GetOrderService {
         return new OrderView();
     }
 
-    private OrderRetrieveRQ createRequest(String locatorCode) {
+    private static OrderRetrieveRQ createRequest(String locatorCode) {
 
         OrderRetrieveRQ rq = new OrderRetrieveRQ();
         rq.setPointOfSale(CommonEntityBuilder.getPosType());
