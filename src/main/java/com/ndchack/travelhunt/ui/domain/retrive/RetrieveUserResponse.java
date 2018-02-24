@@ -13,4 +13,35 @@ public class RetrieveUserResponse {
     TripDetails secondLeg;
     RetrieveRateDetails retriveRateDetails;
 
+    public TravelerDetails getTravelerDetails() {
+        return travelerDetails;
+    }
+
+    public void setTravelerDetails(TravelerDetails travelerDetails) {
+        this.travelerDetails = travelerDetails;
+    }
+
+    public TripDetails getFirstLeg() {
+        return firstLeg;
+    }
+
+    public void setFirstLeg(TripDetails firstLeg) {
+        this.firstLeg = firstLeg;
+    }
+
+    public TripDetails getSecondLeg() {
+        return secondLeg;
+    }
+
+    public void setSecondLeg(TripDetails secondLeg) {
+        this.secondLeg = secondLeg;
+    }
+
+    public RetrieveRateDetails getRetriveRateDetails() {
+        return retriveRateDetails;
+    }
+
+    public void setRetriveRateDetails(RetrieveRateDetails retriveRateDetails) {
+        this.retriveRateDetails = retriveRateDetails;
+    }
 }

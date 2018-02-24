@@ -20,9 +20,97 @@ public class TripDetails {
     String cabinType;
     String isRefundable;
     //Non-stop
-    String type;
+    String travelType;
 
     String duration;
     DateTime arrivalTime;
     DateTime departureTime;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getSourceCode() {
+        return sourceCode;
+    }
+
+    public void setSourceCode(String sourceCode) {
+        this.sourceCode = sourceCode;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getDestinationCode() {
+        return destinationCode;
+    }
+
+    public void setDestinationCode(String destinationCode) {
+        this.destinationCode = destinationCode;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getCabinType() {
+        return cabinType;
+    }
+
+    public void setCabinType(String cabinType) {
+        this.cabinType = cabinType;
+    }
+
+    public String getIsRefundable() {
+        return isRefundable;
+    }
+
+    public void setIsRefundable(String isRefundable) {
+        this.isRefundable = isRefundable;
+    }
+
+    public String getTravelType() {
+        return travelType;
+    }
+
+    public void setTravelType(String travelType) {
+        this.travelType = travelType;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public DateTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(DateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public DateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(DateTime departureTime) {
+        this.departureTime = departureTime;
+    }
 }

@@ -7,6 +7,13 @@ import java.util.List;
  */
 public class UserAncillaryResponse {
 
-    private List<UserAncillaryDetails> userAncillaryDetails;
+    private List<UserAncillaryDetail> userAncillaryDetails;
 
+    public List<UserAncillaryDetail> getUserAncillaryDetails() {
+        return userAncillaryDetails;
+    }
+
+    public void setUserAncillaryDetails(List<UserAncillaryDetail> userAncillaryDetails) {
+        this.userAncillaryDetails = userAncillaryDetails;
+    }
 }
