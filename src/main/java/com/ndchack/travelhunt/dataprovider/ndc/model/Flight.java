@@ -21,7 +21,7 @@ public class Flight {
     private String cabinClass;
     private int flightDuration;
     private int numberOfStops;
-    private String fareReference;
+
     private String fareLevel;
     private String fareBasis;
     private String fareAugKey;
@@ -55,14 +55,6 @@ public class Flight {
 
     public void setFareBasis(String fareBasis) {
         this.fareBasis = fareBasis;
-    }
-
-    public String getFareReference() {
-        return fareReference;
-    }
-
-    public void setFareReference(String fareReference) {
-        this.fareReference = fareReference;
     }
 
     public String getSegmentKey() {

@@ -1,10 +1,12 @@
 package com.ndchack.travelhunt.dataprovider.ndc.builder;
 
+import com.ibsplc.iflyres.simpletypes.FareComponentAugPoint;
 import com.ibsplc.iflyres.simpletypes.FareDetailAugPoint;
 import com.ndchack.travelhunt.dataprovider.ndc.model.Fare;
 import com.ndchack.travelhunt.dataprovider.ndc.model.OD;
 import com.ndchack.travelhunt.dataprovider.ndc.model.OrderView;
 import com.ndchack.travelhunt.dataprovider.ndc.model.Passenger;
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import org.iata.iata.edist.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -44,7 +46,9 @@ public class OrderViewBuilder {
         for (FlightType flightType : rs.getOrder().get(0).getOrderItems().getOrderItem().get(0).getFlightItem().getOriginDestination()) {
 
             OD od = new OD();
+            ods.add(od);
             od.setReferenceKey(flightType.getOriginDestinationKey());
+
 
 
             for (FlightType.Flight orderFlight : flightType.getFlight()) {
@@ -58,17 +62,23 @@ public class OrderViewBuilder {
 
                     String key = obj.getName().getLocalPart();
 
+                    XMLGregorianCalendarImpl cal = null;
                     switch (key) {
-                        case "AirportCode" : flight.setDepartureAirport((String) obj.getValue()); break;
-                        case "Date" : date = (String) obj.getValue(); break;
-                        case "Time" : time = (String) obj.getValue(); break;
+                        case "AirportCode" : flight.setDepartureAirport(((FlightDepartureType.AirportCode) obj.getValue()).getValue()); break;
+                        case "Date" :
+                            cal = ((XMLGregorianCalendarImpl) obj.getValue());
+                            date = cal.getYear() + "-" + cal.getMonth() + "-" + cal.getDay();
+                            break;
+                        case "Time" :
+                            time = ((String) obj.getValue());
+                            break;
                     }
 
                 }
                 if (date != null && time != null) {
 
                     flight.setDepartureTime(
-                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd hh:mm")));
+                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
                 }
 
                 for (JAXBElement<?> obj : orderFlight.getArrival().getRest()) {
@@ -76,18 +86,21 @@ public class OrderViewBuilder {
                     String key = obj.getName().getLocalPart();
 
                     switch (key) {
-                        case "AirportCode" : flight.setArrivalAirport((String) obj.getValue()); break;
-                        case "Date" : date = (String) obj.getValue(); break;
+                        case "AirportCode" : flight.setArrivalAirport(((FlightArrivalType.AirportCode) obj.getValue()).getValue()); break;
+                        case "Date" :
+                            XMLGregorianCalendarImpl cal = ((XMLGregorianCalendarImpl) obj.getValue());
+                            date = cal.getYear() + "-" + cal.getMonth() + "-" + cal.getDay();
+                            break;
                         case "Time" : time = (String) obj.getValue(); break;
                     }
                 }
                 if (date != null && time != null) {
 
                     flight.setArrivalTime(
-                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd hh:mm")));
+                            DateTime.parse(date.substring(0, date.length() - 1) + " " + time, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm")));
                 }
 
-                flight.setMarketingCarrier(orderFlight.getMarketingCarrier().getName());
+                flight.setMarketingCarrier(orderFlight.getMarketingCarrier().getAirlineID().getValue());
                 flight.setFlightNumber(orderFlight.getMarketingCarrier().getFlightNumber().getValue());
                 flight.setBookingCode(orderFlight.getClassOfService().getCode().getValue());
                 flight.setCabinClass(orderFlight.getCabinType().getName());
@@ -100,10 +113,11 @@ public class OrderViewBuilder {
 
                 for(FareComponentType orderComponentType : rs.getOrder().get(0).getOrderItems().getOrderItem().get(0).getFlightItem().getFareDetail().getFareComponent()) {
 
-                    if(orderComponentType.getSegmentReference().getValue().equals(flight.getSegmentKey())) {
+
+                    if(((FlightType.Flight)orderComponentType.getSegmentReference().getValue()).getSegmentKey().equals(flight.getSegmentKey())) {
 
                         for(Object ref : orderComponentType.getRefs()) {
-                            flight.getOtherAugKeys().add((String)ref);
+                            flight.getOtherAugKeys().add(((AugPointType)ref).getKey());
                         }
                         break;
                     }
@@ -116,11 +130,21 @@ public class OrderViewBuilder {
                         for (PriceMetadataType priceMetadataType : other.getPriceMetadatas().getPriceMetadata()) {
 
                             for (AugPointType fareAugPoint : priceMetadataType.getAugmentationPoint().getAugPoint()) {
-                                if (fareAugPoint.getOwner().equals("FareDetailAugPoint")) {
-                                    flight.setFareAugKey(fareAugPoint.getKey());
-                                    flight.setFareBasis(((FareDetailAugPoint)fareAugPoint.getAny()).getFareBasis());
-                                    flight.setFareLevel(((FareDetailAugPoint)fareAugPoint.getAny()).getFareLevel());
-                                    break;
+                                Object obj = fareAugPoint.getAny();
+
+                                if (obj instanceof FareDetailAugPoint)  {
+
+                                    FareDetailAugPoint detailAugPoint = (FareDetailAugPoint) obj;
+                                    for (String segmentAugKey : flight.getOtherAugKeys()) {
+
+                                        if (segmentAugKey.equals(fareAugPoint.getKey())) {
+                                            flight.setFareAugKey(fareAugPoint.getKey());
+                                            flight.setFareBasis(detailAugPoint.getFareBasis());
+                                            flight.setFareLevel(detailAugPoint.getFareLevel());
+                                            break;
+                                        }
+                                    }
+
                                 }
                             }
                         }

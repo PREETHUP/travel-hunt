@@ -23,8 +23,9 @@ public class RetrieveController {
 
     @RequestMapping(value="/retrieve/trips",method = RequestMethod.POST)
     public RetrieveUserResponse retrieve(@RequestParam(value = "orderId") String orderId){
+        GetOrderService service = new GetOrderService();
         //Service call
-        orderView = GetOrderService.getOrder(orderId);
+        orderView = service.getOrder(orderId);
 
         TravelerDetail travelerDetails = new TravelerDetail();
         travelerDetails.setName(orderView.getPax().get(0).getPassengerName());
