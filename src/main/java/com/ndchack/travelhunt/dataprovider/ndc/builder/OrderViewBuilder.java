@@ -105,7 +105,7 @@ public class OrderViewBuilder {
                 flight.setBookingCode(orderFlight.getClassOfService().getCode().getValue());
                 flight.setCabinClass(orderFlight.getCabinType().getName());
                 javax.xml.datatype.Duration timeField = orderFlight.getDetails().getFlightDuration().getValue();
-                flight.setFlightDuration(timeField.getHours() + timeField.getMinutes() + timeField.getSeconds());
+                flight.setFlightDuration(timeField.getHours() * 60 + timeField.getMinutes());
                 flight.setNumberOfStops(0);
 
 

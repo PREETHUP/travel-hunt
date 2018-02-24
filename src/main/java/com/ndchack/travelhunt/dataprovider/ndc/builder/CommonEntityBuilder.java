@@ -25,7 +25,7 @@ public class CommonEntityBuilder {
     public static MsgDocumentType getDocument() {
 
         MsgDocumentType doc = new MsgDocumentType();
-        doc.setReferenceVersion("15.1.2");
+        doc.setReferenceVersion("15.2");
         doc.setName("NDC");
         return doc;
     }
@@ -48,7 +48,7 @@ public class CommonEntityBuilder {
         id.setValue("XQ");
         airlineRecipientType.setAirlineID(id);
         recipient.setORARecipient(airlineRecipientType);
-        JAXBElement<MsgPartiesType.Recipient> rec = new JAXBElement<MsgPartiesType.Recipient>(new QName("Recipient"), MsgPartiesType.Recipient.class, recipient);
+        JAXBElement<MsgPartiesType.Recipient> rec = new JAXBElement<MsgPartiesType.Recipient>(new QName("http://www.iata.org/IATA/EDIST","Recipient"), MsgPartiesType.Recipient.class, recipient);
         party.setRecipient(rec);
 
         return party;
