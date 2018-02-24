@@ -24,5 +24,6 @@ public class Configuration implements InitializingBean {
 
         userSelectedAncillary.put("Primary boarding", Float.valueOf("20"));
         userSelectedAncillary.put("Wifi Internet", Float.valueOf("10"));
+        returnDepartureTime = new DateTime("2018-02-25T01:22");
     }
 }
