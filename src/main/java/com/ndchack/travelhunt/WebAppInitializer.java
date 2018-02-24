@@ -13,6 +13,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class WebAppInitializer{
 
     public static void main(String[] args) throws Exception{
+        System.setProperty("com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
+        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dumpTreshold", "999999");
         SpringApplication.run(WebAppInitializer.class, args);
 
     }

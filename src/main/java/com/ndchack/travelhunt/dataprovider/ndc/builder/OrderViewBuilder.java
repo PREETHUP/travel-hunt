@@ -2,7 +2,6 @@ package com.ndchack.travelhunt.dataprovider.ndc.builder;
 
 import com.ndchack.travelhunt.dataprovider.ndc.model.OD;
 import com.ndchack.travelhunt.dataprovider.ndc.model.OrderView;
-import org.iata.iata.edist.ItinReshopRS;
 import org.iata.iata.edist.OrderViewRS;
 
 /**
@@ -16,11 +15,13 @@ public class OrderViewBuilder {
 
 
 
+
         return response;
     }
 
     private OD buildOD(OrderViewRS rs) {
 
+        //rs.
         return null;
     }
 }

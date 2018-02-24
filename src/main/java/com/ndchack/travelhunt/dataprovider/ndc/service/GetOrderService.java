@@ -41,7 +41,7 @@ public class GetOrderService {
         query.setFilters(filters);
         OrderIDType orderIDType = new OrderIDType();
         filters.setOrderID(orderIDType);
-        orderIDType.setValue("R4254R");
+        orderIDType.setValue(locatorCode);
         orderIDType.setOwner("XQ");
         rq.setQuery(query);
 
