@@ -2,6 +2,8 @@ package com.ndchack.travelhunt.ui.domain.retrive;
 
 import org.joda.time.DateTime;
 
+import java.util.Date;
+
 /**
  * Created by a-6281 on 2/24/18.
  */
@@ -23,8 +25,8 @@ public class TripDetail {
     String travelType;
 
     String duration;
-    DateTime arrivalTime;
-    DateTime departureTime;
+    Date arrivalTime;
+    Date departureTime;
 
     public String getSource() {
         return source;
@@ -98,19 +100,19 @@ public class TripDetail {
         this.duration = duration;
     }
 
-    public DateTime getArrivalTime() {
+    public Date getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(DateTime arrivalTime) {
+    public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public DateTime getDepartureTime() {
+    public Date getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(DateTime departureTime) {
+    public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
 }

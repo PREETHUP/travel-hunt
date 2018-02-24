@@ -35,8 +35,8 @@ public class RetrieveController {
         tripDetail.setIsRefundable(Boolean.TRUE);
         tripDetail.setTravelType("Non-stop");
         tripDetail.setDuration("3");
-        tripDetail.setArrivalTime(new DateTime().plusHours(3));
-        tripDetail.setDepartureTime(new DateTime());
+        tripDetail.setArrivalTime(new DateTime().toDate());
+        tripDetail.setDepartureTime(new DateTime().toDate());
 
         TravelerDetail travelerDetails = new TravelerDetail();
         travelerDetails.setName("Test test");
