@@ -17,6 +17,7 @@ public class Configuration implements InitializingBean {
     public static HashMap<String, Float> airlineAncillary = new HashMap();
     public static DateTime returnDepartureTime;
     public static DateTime departureTime;
+    public static String gameStage = "0";
 
     public void afterPropertiesSet() {
         airlineAncillary.put("Extra Leg Room", Float.valueOf("40"));

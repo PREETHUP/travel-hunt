@@ -51,6 +51,7 @@ public class UserAncillaryService {
         for(String id :  ids) {
             Configuration.userSelectedAncillary.put(id, Configuration.airlineAncillary.get(id));
         }
+        Configuration.gameStage = "2";
     }
 
     private List<UserAncillaryDetail> populateUserAncillaryDetailsList() {
@@ -86,29 +87,20 @@ public class UserAncillaryService {
     public UserAncillaryResponse getAncillaryResponse() {
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
 
-        String stage = getStage();
+        String stage = Configuration.gameStage;
         userAncillaryResponse.setStage(stage);
-        if( (stage.equals("0") || stage.equals("1") ) && (Configuration.airlineAncillary.size() > 0 && !Configuration.airlineAncillary.isEmpty()) ) {
+
+
+
+        if( (stage.equals("0") && !Configuration.airlineAncillary.isEmpty()) ) {
             userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         } else if ( stage.equals("3") || stage.equals("2") ){
-            userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
+            userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
         } else {
             //doservice Call
+            Configuration.gameStage = "1";
             userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         }
         return userAncillaryResponse;
-    }
-
-    private String getStage() {
-        if (new DateTime().isBefore(Configuration.departureTime)) {
-            return "0";
-        } else if ( new DateTime().isAfter(Configuration.returnDepartureTime.minusHours(6)) ) {
-            return "3";
-        } else if (Configuration.userSelectedAncillary.size() > 0 && !Configuration.userSelectedAncillary.isEmpty()) {
-            return "2";
-        } else if (Configuration.airlineAncillary.size() > 0 && !Configuration.airlineAncillary.isEmpty()) {
-            return "1";
-        }
-        return null;
     }
 }
