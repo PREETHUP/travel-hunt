@@ -151,7 +151,7 @@ footer {
 
 @media(max-width: 1024px) {
     .intro {
-        height:80vh;
+        /*height:80vh;*/
     }
 
     .intro .navbar-toggle {
@@ -185,7 +185,7 @@ footer {
     }
 
     .intro {
-        height: 80vh;
+        /*height: 80vh;*/
     }
 }
 
@@ -13251,7 +13251,7 @@ rzslider span.rz-bar.rz-selection {
 }
 
 .flight-details-overlay {
-    width: 930px
+    /*width: 930px*/
 }
 
 .flight-details-overlay .short-details {
@@ -13381,7 +13381,7 @@ rzslider span.rz-bar.rz-selection {
 .flight-details-overlay .overlay-content .itinerary-details {
     clear: both;
     background: #fff;
-    padding: 20px;
+    /*padding: 20px;*/
     -moz-border-radius: 0 0 3px 3px;
     -webkit-border-radius: 0;
     border-radius: 0 0 3px 3px
@@ -13517,7 +13517,7 @@ rzslider span.rz-bar.rz-selection {
 }
 
 .flight-details-overlay .overlay-content .fare-summary-rules {
-    padding: 20px;
+    /*padding: 20px;*/
     background: #fff;
     -moz-border-radius: 0 0 3px 3px;
     -webkit-border-radius: 0;
@@ -13532,7 +13532,7 @@ rzslider span.rz-bar.rz-selection {
 @media only screen and (max-width: 990px) {
     .flight-details-overlay .overlay-content .fare-summary-rules .one-fourth {
         clear:both;
-        width: 100%
+        /*width: 30%*/
     }
 }
 

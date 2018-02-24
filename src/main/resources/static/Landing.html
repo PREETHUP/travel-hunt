@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/w3.css">
     <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
 
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel="stylesheet" href="css/w3-theme-blue-grey.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
-    <body class="w3-theme-l5">
+    <body class="w3-theme-l5 intro-cus intro " style="height: calc(100vh);overflow: auto;overflow-x: hidden;">
         <div class="w3-top">
             <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
                 <a style=" background-color: #ffffffcc !important; " class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><img src="images/logo-sunexpress@2x.png" /></a>
@@ -42,37 +42,31 @@
                                             <div class="row fare-summary-rules" >
                                                 <div class="one-fourth" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
                                                     <div class="insert-content">
-                                                        <table class="fareSummary" width="100%" cellspacing="0" cellpadding="0" style="position:relative;">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th colspan="4">
-                                                                        <h3 class="bold">Fare Summary</h3>
-                                                                    </th>
-                                                                    <th class="tr bold" >ADT x1</th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="firstTR">
-
-                                                                <tr class="detailtax">
-                                                                    <td colspan="4"> Base Fare </td>
-                                                                    <td class="tr pax_1">{{tripdetails.basefare}} <i class="rs">{{tripdetails.currency}}</i></td>
-
-                                                                </tr>
-                                                                <tr class="detailtax">
-                                                                    <td colspan="4"> Taxes </td>
-                                                                    <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
-
-                                                                </tr>
-                                                            </tbody>
-                                                            <tbody class="detailtax bg-grey">
-                                                                <tr class="">
-                                                                    <td colspan="4" class="bold no-border"> Total </td>
-                                                                    <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
-                                                                </tr>
-                                                            </tbody>
-
+                                                        
+                                                        <table class="w3-table-all w3-card-4">
+                                                            <tr>
+                                                                <th><p>Fare Summary</p></th>
+                                                                <th><p> ADT x1</p></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p><i class="fa fa-fw fa-wifi"></i> Base Fare</p></td>
+                                                                <td class="tr pax_1">{{tripdetails.basefare}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p><i class="fa fa-fw fa-wheelchair"></i> Taxes</p></td>
+                                                                 <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                            </tr>
+                                                            <tr class="w3-grey" style="
+                                                                color: white !important;
+                                                                background-color: #d87b7b!important;
+                                                                ">
+                                                                <td><p><i class="fa fa-fw fa-cutlery"></i> Total</p></td>
+                                                                 <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                            </tr>
                                                         </table>
+                                                        
+                                                        
+                                                       
                                                     </div>
                                                 </div>
 
@@ -120,6 +114,7 @@
                             </div>
                             <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> SFO - NYC  |  AS - 1193</button>
                             <div id="Demo3" class="w3-hide w3-container">
+                                <div class="hide-my-non-game-div"> 
                                 <div class="flight-info-container flight-details-overlay" >
 
                                     <div class="overlay-content">
@@ -160,7 +155,7 @@
                                 </div>
 
 
-                                <table class="w3-table-all">
+                                <table class="w3-table-all w3-card-4">
                                     <tr class="w3-green">
                                         <th></th>
                                         <th>Ancillary</th>
@@ -180,14 +175,18 @@
                                     Upon completion we get discount based on the gamepoints
                                 </code>
                                 <hr>
-                                <p><button class="w3-button w3-green w3-third" ng-click="startGame()">Start Game</button></p>
+                                    <p ><button style="
+                                                margin-top: -10%;
+                                                " class="w3-button w3-green w3-third" onclick="startGame()">Start Game</button></p>
+                                    <hr>
+                                </div>
+                                <div class="show-my-game-div" style="display: none">
 
-
-								
-                                <div  id="apartment">
-                                    <h4 class="w3-text-green">Welcome to the game</h4>
-                                    <div class="w3-display-container mySlides">
-                                        <img src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+                                    <div  id="apartment"  >
+                                        <h5 class="w3-text-green">Welcome to the game</h5>
+                                        <h6 class="w3-text-green">Ancillery wifi -> 150pts</h6>
+                                        <div class="w3-display-container mySlides  w3-card-4">
+                                            <img class="w3-opacity-max" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
                                         <div class="w3-display-bottomleft w3-container w3-black">
                                             <p>Dest-1 15points</p>
                                         </div>
@@ -228,12 +227,42 @@
 
 
                                 <hr>
+                                    <div class="w3-light-grey w3-round-large show-my-div" style="margin-bottom: 10px;display: none" >
+                                        <div class="w3-container w3-blue w3-round-large" style="width:25%">1/5</div>
+                                    </div>
+                                    <button class="w3-button w3-purple" onclick="startTimer();">Tag my location</button>
+                                    <hr>
 
                             </div>
                         </div>      
                     </div>
+                    </div>
                     <br>
 
+                </div>
+            </div>
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content" style=" margin-top: 46%; ">
+                    <header class="w3-container w3-green" style=" height: 50px; "> 
+                        <span onclick="document.getElementById('id01').style.display = 'none'" 
+                              class="w3-button w3-display-topright">&times;</span>
+                        <h4>Verifying geo location</h4>
+                    </header>
+                    <div class="w3-container" style="height: 200px;">
+                        <div class="hide-my-div" style="padding: 9%;padding-left: 31%;">
+                            <p>Verifying the location</p>
+                            <p style="padding-left: 10%;"><i class="fa fa-spinner w3-spin" style="font-size:48px;"></i></p>
+                            <p>please wait ....</p>
+        </div>
+                        <div class="show-my-div" style="display: none;padding: 9%;padding-top: 10px">
+
+                            <div class="w3-panel w3-green w3-round-large" style="height: 117px;width: 268px;">
+                                <h3>Success!</h3>
+                                <p class="show-my-div-p"></p>
+                            </div>
+                            <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>Awesome you earned 50points!!!</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,8 +270,16 @@
         <footer class="w3-container w3-theme-d3 w3-padding-16 w3-hide">
             <h5>Footer</h5>
         </footer>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous">
+        </script>
         <script>
             // Accordion
+            alert('sss')
+            function startGame(id) {
+                $('.show-my-game-div').show();
+                $('.hide-my-non-game-div').hide();
+            }
             function myFunction(id) {
                 var x = document.getElementById(id);
                 if (x.className.indexOf("w3-show") == -1) {
@@ -253,6 +290,30 @@
                     x.previousElementSibling.className =
                             x.previousElementSibling.className.replace(" w3-theme-d1", "");
                 }
+            }
+            function startTimer(id) {
+                $('#id01').show();
+                $('.hide-my-div').show();
+                $('.show-my-div').hide();
+                function showPosition(position) {
+                    var prepareCoordinates = "Latitude: " + position.coords.latitude +
+                            "<br>Longitude: " + position.coords.longitude;
+                    $('.hide-my-div').fadeOut();
+                    $('.show-my-div').fadeIn();
+                    $('.show-my-div-p').html(prepareCoordinates)
+
+                }
+
+
+                setTimeout(function () {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        $('.hide-my-div').fadeOut();
+                        $('.show-my-div').fadeIn();
+                        $('.show-my-div').html('Geolocation is not supported by this browser.')
+                    }
+                }, 1000);
             }
 
             // Used to toggle the menu on smaller screens when clicking on the menu button
@@ -338,7 +399,7 @@
                         $scope.firstLeg = response.data.firstLeg;
                         $scope.secondLeg = response.data.secondLeg;
                         var arrDate = $scope.firstLeg.arrivalTime;
-                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
+//                        $scope.firstLeg.arrivalTime = arrDate.getHours() + "h "+arrDate.getMinutes() + "m";
                     });
 
 					$http.get('/content.json').then(function(response) {
@@ -346,9 +407,7 @@
 					});
 				});
 				
-				$scope.startGame = function() {
-					$scope.myData.data;
-				}
+				
 			});
 		</script>
     </body>
