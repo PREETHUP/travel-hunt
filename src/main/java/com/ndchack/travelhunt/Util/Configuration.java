@@ -1,6 +1,7 @@
 package com.ndchack.travelhunt.Util;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -9,10 +10,19 @@ import java.util.HashMap;
  * Created by a-6281 on 2/24/18.
  */
 @Component
-public class Configuration {
+public class Configuration implements InitializingBean {
 
-    public static int discount = 0;
+    public static int discount = 75;
     public static HashMap<String, Float> userSelectedAncillary = new HashMap();
     public static HashMap<String, Float> airlineAncillary = new HashMap();
     public static DateTime returnDepartureTime;
+
+    public void afterPropertiesSet() {
+        airlineAncillary.put("Extra Leg Room", Float.valueOf("40"));
+        airlineAncillary.put("Primary boarding", Float.valueOf("20"));
+        airlineAncillary.put("Wifi Internet", Float.valueOf("10"));
+
+        userSelectedAncillary.put("Primary boarding", Float.valueOf("20"));
+        userSelectedAncillary.put("Wifi Internet", Float.valueOf("10"));
+    }
 }
