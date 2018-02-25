@@ -14,7 +14,10 @@
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
+	
     <body class="w3-theme-l5 intro-cus intro " style="height: calc(100vh);overflow: auto;overflow-x: hidden;" ng-app="travelhunt">
+    <div>
+    	<div ng-controller=AncillarySelection>
         <div class="w3-top">
             <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
                 <a style=" background-color: #ffffffcc !important; " class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><img src="images/logo-sunexpress@2x.png" /></a>
@@ -27,8 +30,9 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">{{firstLeg.source}}  {{firstLeg.destination}}</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">{{secondLeg.source}}  {{secondLeg.destination}}</a>
         </div>
-        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" >
-            <div class="w3-row" ng-controller=AncillarySelection>
+
+        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+            <div class="w3-row">
                 <div class="w3-col m3">
                     <div class="w3-card w3-round">
                         <div class="w3-white">
@@ -54,14 +58,14 @@
                                                             </tr>
                                                             <tr>
                                                                 <td><p><i class="fa fa-fw fa-wheelchair"></i> Taxes</p></td>
-                                                                <td class="tr pax_1">{{tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                                <td class="tr pax_1">{{tripdetails.taxes == null ? "0" : tripdetails.taxes}} <i class="rs">{{tripdetails.currency}}</i></td>
                                                             </tr>
                                                             <tr class="w3-grey" style="
                                                                 color: white !important;
                                                                 background-color: #d87b7b!important;
                                                                 ">
                                                                 <td><p><i class="fa fa-fw fa-cutlery"></i> Total</p></td>
-                                                                <td colspan="4" class="tr bold no-border">{{tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
+                                                                <td colspan="4" class="tr bold no-border">{{tripdetails.total == null ? tripdetails.basefare : tripdetails.total}} <i class="rs">{{tripdetails.currency}}</i></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -73,7 +77,7 @@
                                 </div>
 
                             </div>
-                            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> {{firstLeg.source}} - {{firstLeg.destination}} | {{firstLeg.carrier}} - {{firstLeg.flightNumber}}</button>
+                            <button onclick="myFunction('Demo2')" ng-click="getTrips()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> {{firstLeg.source}} - {{firstLeg.destination}} | {{firstLeg.carrier}} - {{firstLeg.flightNumber}}</button>
                             <div id="Demo2" class="w3-hide">
                                 <div class="flight-info-container flight-details-overlay" >
                                     <div class="overlay-content">
@@ -109,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> {{secondLeg.source}} - {{secondLeg.destination}} | {{secondLeg.carrier}} - {{secondLeg.flightNumber}}</button>
+                            <button onclick="myFunction('Demo3')" ng-click="getTrips()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> {{secondLeg.source}} - {{secondLeg.destination}} | {{secondLeg.carrier}} - {{secondLeg.flightNumber}}</button>
                             <div id="Demo3" class="w3-hide w3-container">
                                 <div class="hide-my-non-game-div"> 
                                     <div class="flight-info-container flight-details-overlay" >
@@ -303,6 +307,8 @@
         <footer class="w3-container w3-theme-d3 w3-padding-16 w3-hide">
             <h5>Footer</h5>
         </footer>
+        </div>
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous">
         </script>
@@ -454,23 +460,30 @@
         <script type="text/javascript">
             var app = angular.module('travelhunt', []);
             app.controller('AncillarySelection', function($scope, $http) {
+            	
+           	$scope.getTrips = function() {
+           		$http.get("/retrieve/trips").then(function(response){
+                    $scope.tripdetails = response.data.retriveRateDetails;
+                    $scope.firstLeg = response.data.firstLeg;
+                                var f_depDate = new Date($scope.firstLeg.departureTime);
+                                $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
+        						$scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+
+                    $scope.secondLeg = response.data.secondLeg;
+                                var s_depDate = new Date($scope.secondLeg.departureTime);
+                                $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
+                                $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+                                
+                    });
+           	}
 
             angular.element(document).ready(function() {
 
             $http.get("/retrieve/trips").then(function(response){
-            $scope.tripdetails = response.data.retriveRateDetails;
-            $scope.firstLeg = response.data.firstLeg;
-            var f_depDate = new Date($scope.firstLeg.departureTime);
-            $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
-            $scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
-            $scope.secondLeg = response.data.secondLeg;
-            var s_depDate = new Date($scope.secondLeg.departureTime);
-            $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
-            $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+            	$scope.getTrips();
             });
             $http.get('/list/ancillaries').then(function(response) {
-
-            $scope.myData = response;
+            	$scope.myData = response;
             });
             $scope.callStartGame = function(){
             var data = {
@@ -481,8 +494,6 @@
             $('.show-my-game-div').show();
             $('.hide-my-non-game-div').hide();
             });
-             
-            
             }
 
             $scope.callUpadateAncillariesGame = function(){
@@ -512,12 +523,8 @@
                       totalTasks:finalImageLengthArray,
             }
             $http.post("/update/ancillaries", JSON.stringify(data)).then(function(response) {
-           
             $scope.myData = response;
             });
-            
-            
-            
             
             $('#setProgressValue').css({width: calculation + '%'});
                     $('#setProgressValue').html(prepareProgress);
@@ -527,15 +534,13 @@
             }
             setTimeout(function () {
             if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            	navigator.geolocation.getCurrentPosition(showPosition);
             } else {
-            $('.hide-my-div').fadeOut();
-            $('.show-my-div').fadeIn();
-            $('.show-my-div').html('Geolocation is not supported by this browser.')
+	            $('.hide-my-div').fadeOut();
+	            $('.show-my-div').fadeIn();
+	            $('.show-my-div').html('Geolocation is not supported by this browser.')
             }
             }, 1000);
-            } else {
-            alert('Location already completed');
             }
             }
             });
