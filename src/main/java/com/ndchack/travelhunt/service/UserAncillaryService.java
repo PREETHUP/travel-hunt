@@ -2,6 +2,7 @@ package com.ndchack.travelhunt.service;
 
 import com.ndchack.travelhunt.Util.Configuration;
 import com.ndchack.travelhunt.Util.OrderResponseData;
+import com.ndchack.travelhunt.Util.Util;
 import com.ndchack.travelhunt.dataprovider.ndc.model.Ancillary;
 import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceList;
 import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceListRequest;
@@ -33,15 +34,6 @@ public class UserAncillaryService {
         return userAncillaryResponse;
     }
 
-    public UserAncillaryResponse retrieveAirAncillaryDetailsWithApiCall(){
-        //do Service call
-        //update the Air Ancillary list
-        // generate ancillary list
-        return new UserAncillaryResponse();
-    }
-
-
-
     public void updateUserAncillaryAmount(Integer tasksFinished, Integer totalTasks) {
         Float percentageFraction = (Float.valueOf(tasksFinished.toString())/Float.valueOf(totalTasks.toString()));
         Float percentage = percentageFraction*Configuration.discount;
@@ -67,9 +59,9 @@ public class UserAncillaryService {
             userAncillaryDetail.setAncillaryName(userAncillaryName);
             Float totalAmount = Configuration.airlineAncillary.get(userAncillaryName);
             Float discountedAmount = Configuration.userSelectedAncillary.get(userAncillaryName);
-            userAncillaryDetail.setDiscountedAmount(discountedAmount);
-            userAncillaryDetail.setTotalAmount(totalAmount);
-            userAncillaryDetail.setSavedAmount(totalAmount-discountedAmount);
+            userAncillaryDetail.setDiscountedAmount(Util.round(discountedAmount,2));
+            userAncillaryDetail.setTotalAmount(Util.round(totalAmount,2));
+            userAncillaryDetail.setSavedAmount(Util.round(totalAmount,2)-Util.round(discountedAmount,2));
             userAncillaryDetails.add(userAncillaryDetail);
         }
         Collections.sort(userAncillaryDetails);
@@ -81,8 +73,12 @@ public class UserAncillaryService {
         for(String userAncillaryName :  Configuration.airlineAncillary.keySet()) {
             UserAncillaryDetail userAncillaryDetail = new UserAncillaryDetail();
             userAncillaryDetail.setAncillaryName(userAncillaryName);
-            userAncillaryDetail.setTotalAmount(Configuration.airlineAncillary.get(userAncillaryName));
-            userAncillaryDetail.setDiscountedAmount(Float.valueOf("0"));
+
+            Float totalAmount = Configuration.airlineAncillary.get(userAncillaryName);
+            Float maximumDiscountedAmount = totalAmount * (Integer.valueOf(Configuration.discount).floatValue()/100);
+
+            userAncillaryDetail.setTotalAmount(Util.round(totalAmount,2));
+            userAncillaryDetail.setDiscountedAmount(Util.round(maximumDiscountedAmount,2));
             userAncillaryDetail.setSavedAmount(Float.valueOf("0"));
             userAncillaryDetails.add(userAncillaryDetail);
         }
@@ -104,7 +100,6 @@ public class UserAncillaryService {
         } else if ( stage.equals("3") || stage.equals("2") ){
             userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
         } else {
-            //doservice Call
             GetServiceListService listService = new GetServiceListService();
             ServiceListRequest req = new ServiceListRequest();
             req.setOdId(OrderResponseData.getOrderDetails().getOds().get(0).getReferenceKey());
