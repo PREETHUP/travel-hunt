@@ -1,7 +1,11 @@
 package com.ndchack.travelhunt.service;
 
 import com.ndchack.travelhunt.Util.Configuration;
-import com.ndchack.travelhunt.ui.domain.Ancilaries.AncillaryIdWrapper;
+import com.ndchack.travelhunt.Util.OrderResponseData;
+import com.ndchack.travelhunt.dataprovider.ndc.model.Ancillary;
+import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceList;
+import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceListRequest;
+import com.ndchack.travelhunt.dataprovider.ndc.service.GetServiceListService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryDetail;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
 import org.joda.time.DateTime;
@@ -18,12 +22,14 @@ public class UserAncillaryService {
     public UserAncillaryResponse retrieveUserAncillaryDetails(){
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
         userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
+        userAncillaryResponse.setStage(Configuration.gameStage);
         return userAncillaryResponse;
     }
 
     public UserAncillaryResponse retrieveAirlineAncillaryDetails(){
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
         userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
+        userAncillaryResponse.setStage(Configuration.gameStage);
         return userAncillaryResponse;
     }
 
@@ -87,10 +93,11 @@ public class UserAncillaryService {
     public UserAncillaryResponse getAncillaryResponse() {
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
 
+        if (new DateTime().isAfter(Configuration.departureTime)) {
+            Configuration.gameStage = "1";
+        }
         String stage = Configuration.gameStage;
         userAncillaryResponse.setStage(stage);
-
-
 
         if( (stage.equals("0") && !Configuration.airlineAncillary.isEmpty()) ) {
             userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
@@ -98,9 +105,17 @@ public class UserAncillaryService {
             userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
         } else {
             //doservice Call
-            Configuration.gameStage = "1";
+            GetServiceListService listService = new GetServiceListService();
+            ServiceListRequest req = new ServiceListRequest();
+            req.setOdId(OrderResponseData.getOrderDetails().getOds().get(0).getReferenceKey());
+            req.setFlight(OrderResponseData.getOrderDetails().getOds().get(0).getFlights().get(0));
+            ServiceList list = listService.getServices(req);
+            for (Ancillary ancillary : list.getAncillaries()) {
+                Configuration.airlineAncillary.put(ancillary.getAncillaryName(), ancillary.getPrice());
+            }
             userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         }
         return userAncillaryResponse;
     }
+
 }
