@@ -75,10 +75,10 @@ public class UserAncillaryService {
             userAncillaryDetail.setAncillaryName(userAncillaryName);
 
             Float totalAmount = Configuration.airlineAncillary.get(userAncillaryName);
-            Float maximumDiscountedAmount = totalAmount * (Integer.valueOf(Configuration.discount).floatValue()/100);
+            Float discountedAmount = totalAmount * (Integer.valueOf(Configuration.discount).floatValue()/100);
 
             userAncillaryDetail.setTotalAmount(Util.round(totalAmount,2));
-            userAncillaryDetail.setDiscountedAmount(Util.round(maximumDiscountedAmount,2));
+            userAncillaryDetail.setDiscountedAmount(Util.round(totalAmount,2)-Util.round(discountedAmount,2));
             userAncillaryDetail.setSavedAmount(Float.valueOf("0"));
             userAncillaryDetails.add(userAncillaryDetail);
         }
