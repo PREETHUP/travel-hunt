@@ -24,6 +24,7 @@ public class UserAncillaryService {
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
         userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
         userAncillaryResponse.setStage(Configuration.gameStage);
+        userAncillaryResponse.setImagesCompleted(Configuration.imageCompleted);
         return userAncillaryResponse;
     }
 
@@ -100,6 +101,7 @@ public class UserAncillaryService {
             userAncillaryResponse.setUserAncillaryDetails(getAllAirAncillaryDetailsFromDb());
         } else if ( stage.equals("3") || stage.equals("2") ){
             userAncillaryResponse.setUserAncillaryDetails(populateUserAncillaryDetailsList());
+            userAncillaryResponse.setImagesCompleted(Configuration.imageCompleted);
         } else {
             GetServiceListService listService = new GetServiceListService();
             ServiceListRequest req = new ServiceListRequest();

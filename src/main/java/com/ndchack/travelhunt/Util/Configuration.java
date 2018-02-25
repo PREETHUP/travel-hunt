@@ -4,7 +4,9 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by a-6281 on 2/24/18.
@@ -19,6 +21,7 @@ public class Configuration implements InitializingBean {
     public static DateTime firstLegDepartureTime;
 
     public static String gameStage = "0";
+    public static List<String> imageCompleted = new ArrayList<String>();
 
     public void afterPropertiesSet() {
         /*airlineAncillary.put("Extra Leg Room", Float.valueOf("40"));

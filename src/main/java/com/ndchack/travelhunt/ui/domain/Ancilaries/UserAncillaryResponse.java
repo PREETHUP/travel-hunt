@@ -9,6 +9,7 @@ public class UserAncillaryResponse {
 
     private List<UserAncillaryDetail> userAncillaryDetails;
     private String stage;
+    private List<String> imagesCompleted;
 
 
     public List<UserAncillaryDetail> getUserAncillaryDetails() {
@@ -25,5 +26,13 @@ public class UserAncillaryResponse {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public List<String> getImagesCompleted() {
+        return imagesCompleted;
+    }
+
+    public void setImagesCompleted(List<String> imagesCompleted) {
+        this.imagesCompleted = imagesCompleted;
     }
 }

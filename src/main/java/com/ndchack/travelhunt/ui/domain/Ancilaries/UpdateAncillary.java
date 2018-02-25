@@ -6,6 +6,7 @@ package com.ndchack.travelhunt.ui.domain.Ancilaries;
 public class UpdateAncillary {
     String tasksFinished;
     String totalTasks;
+    String imageId;
 
     public String getTasksFinished() {
         return tasksFinished;
@@ -21,5 +22,13 @@ public class UpdateAncillary {
 
     public void setTotalTasks(String totalTasks) {
         this.totalTasks = totalTasks;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 }

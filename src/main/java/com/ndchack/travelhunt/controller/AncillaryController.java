@@ -1,5 +1,6 @@
 package com.ndchack.travelhunt.controller;
 
+import com.ndchack.travelhunt.Util.Configuration;
 import com.ndchack.travelhunt.service.UserAncillaryService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.AncillaryIdWrapper;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
@@ -20,6 +21,7 @@ public class AncillaryController {
     @RequestMapping(value="/update/ancillaries",method = RequestMethod.POST)
 public UserAncillaryResponse updateUserAncillaryAmount(@RequestBody UpdateAncillary updateAncillary){
     userAncillaryService.updateUserAncillaryAmount(Integer.valueOf(updateAncillary.getTasksFinished()), Integer.valueOf(updateAncillary.getTotalTasks()));
+        Configuration.imageCompleted.add(updateAncillary.getImageId());
     return  userAncillaryService.retrieveUserAncillaryDetails();
 
 }
