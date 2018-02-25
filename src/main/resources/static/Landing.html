@@ -157,25 +157,37 @@
                                             <th></th>
                                             <th>Ancillary</th>
                                             <th>Actual Price</th>
-                                            <th>Max Discount Price</th>
+                                            <div ng-if="myData.data.stage == '1'">
+                                                <th>Max Discount Price</th>
+                                            </div>
+                                            <div ng-if="myData.data.stage == '2'">
+                                                <th>Current Discount Price</th>
+                                            </div>
+                                            <div ng-if="myData.data.stage == '3'">
+                                                <th>Final Discount Price</th>
+                                            </div>
                                         </tr>
-                                        <tr ng-repeat="ancillary in myData.data.ancillaries">
-                                            <td><input type="checkbox" ng-model="ancillary[0]"></td>
-                                            <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
-                                        <td>{{ancillary[2]}}</td>
-                                        <td>{{ancillary[3]}}</td>
+                                        <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
+                                            <td><div ng-if="myData.data.stage == '0'"><input type="checkbox" ng-model="ancillary.ancillaryName"></div></td>
+                                            <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
+                                            <td>{{ancillary.ancillaryName}}</td>
+                                            <td>{{ancillary.totalAmount}}</td>
+                                            <td>{{ancillary.discountedAmount}}</td>
                                         </tr>
                                     </table>
-                                    <hr>
-                                    <code class="w3-codespan">
-                                    Select any ancillary to start the game.
-                                    Upon completion we get discount based on the game points
-                                    </code>
-                                    <hr>
-                                    <p ><button style="
-                                                margin-top: -10%;
-                                                " class="w3-button w3-green w3-third" onclick="startGame()">Start Game</button></p>
-                                    <hr>
+                                    <div ng-if="myData.data.stage == '1'">
+                                        <hr>
+                                        <code class="w3-codespan">
+                                        Select any ancillary for your return flight and submit to start the game.
+                                        When you are closer to board we book them for you with discount based on the points you earn
+                                        </code>
+                                        <hr>
+                                        <p ><button style="
+                                                    margin-top: -10%;
+                                                    " class="w3-button w3-green w3-third" onclick="startGame()">Start Game</button></p>
+                                        <hr>
+                                    </div>
+
                                 </div>
                                 <div class="show-my-game-div" style="display: none">
 
@@ -421,26 +433,26 @@
             var app = angular.module('travelhunt', []);
             app.controller('AncillarySelection', function($scope, $http) {
 
-            angular.element(document).ready(function() {
+                angular.element(document).ready(function() {
 
-            $http.get("/retrieve/trips").then(function(response){
-            $scope.tripdetails = response.data.retriveRateDetails;
-            $scope.firstLeg = response.data.firstLeg;
-                        var f_depDate = new Date($scope.firstLeg.departureTime);
-                        $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
-						$scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
+                    $http.get("/retrieve/trips").then(function(response){
+                        $scope.tripdetails = response.data.retriveRateDetails;
+                        $scope.firstLeg = response.data.firstLeg;
+                                    var f_depDate = new Date($scope.firstLeg.departureTime);
+                                    $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
+                                    $scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
 
-            $scope.secondLeg = response.data.secondLeg;
-                        var s_depDate = new Date($scope.secondLeg.departureTime);
-                        $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
-                        $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
-                        
-            });
+                        $scope.secondLeg = response.data.secondLeg;
+                                    var s_depDate = new Date($scope.secondLeg.departureTime);
+                                    $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
+                                    $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
 
-            $http.get('/content.json').then(function(response) {
-            $scope.myData = response;
-            });
-            });
+                    });
+
+                    $http.get('/list/ancillaries').then(function(response) {
+                        $scope.myData = response;
+                    });
+                });
 				
 				
             });
