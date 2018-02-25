@@ -3,6 +3,7 @@ package com.ndchack.travelhunt.controller;
 import com.ndchack.travelhunt.service.UserAncillaryService;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.AncillaryIdWrapper;
 import com.ndchack.travelhunt.ui.domain.Ancilaries.UserAncillaryResponse;
+import com.ndchack.travelhunt.ui.domain.Ancilaries.UpdateAncillary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,19 +18,19 @@ public class AncillaryController {
     private UserAncillaryService userAncillaryService;
 
     @RequestMapping(value="/update/ancillaries",method = RequestMethod.POST)
-    public UserAncillaryResponse updateUserAncillaryAmount(@RequestParam(value = "tasksFinished") Integer tasksFinished, @RequestParam(value = "totalTasks") Integer totalTasks){
-        userAncillaryService.updateUserAncillaryAmount(tasksFinished, totalTasks);
-        return  userAncillaryService.retrieveUserAncillaryDetails();
+public UserAncillaryResponse updateUserAncillaryAmount(@RequestBody UpdateAncillary updateAncillary){
+    userAncillaryService.updateUserAncillaryAmount(Integer.valueOf(updateAncillary.getTasksFinished()), Integer.valueOf(updateAncillary.getTotalTasks()));
+    return  userAncillaryService.retrieveUserAncillaryDetails();
 
-    }
+}
 
     @RequestMapping(value="/list/ancillaries",method = RequestMethod.GET)
     public UserAncillaryResponse getAncillaryList(){
         return userAncillaryService.getAncillaryResponse();
     }
 
-    @RequestMapping(value="/set/user/ancillaries",method = RequestMethod.POST, consumes = "application/json")
-    public UserAncillaryResponse setUserAncillary(@RequestBody AncillaryIdWrapper ancillaryIdWrapper, @RequestParam(value = "ancillaryId") String ancillaryIds){
+    @RequestMapping(value="/set/user/ancillaries",method = RequestMethod.POST)
+    public UserAncillaryResponse setUserAncillary(@RequestBody AncillaryIdWrapper ancillaryIdWrapper){
         userAncillaryService.setUserAncillary(ancillaryIdWrapper.getAncillaryIds());
         return userAncillaryService.retrieveUserAncillaryDetails();
     }

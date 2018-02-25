@@ -14,7 +14,7 @@
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
-    <body class="w3-theme-l5 intro-cus intro " style="height: calc(100vh);overflow: auto;overflow-x: hidden;">
+    <body class="w3-theme-l5 intro-cus intro " style="height: calc(100vh);overflow: auto;overflow-x: hidden;" ng-app="travelhunt">
         <div class="w3-top">
             <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
                 <a style=" background-color: #ffffffcc !important; " class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><img src="images/logo-sunexpress@2x.png" /></a>
@@ -24,10 +24,10 @@
         <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
             <a href="#" class="w3-bar-item w3-button w3-padding-large">Price summary</a>
             <a href="#" class="w3-bar-item w3-button w3-padding-large">Price summary</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">{{firstLeg.source}} - {{firstLeg.destination}}</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">{{secondLeg.source}} - {{secondLeg.destination}}</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">{{firstLeg.source}}  {{firstLeg.destination}}</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">{{secondLeg.source}}  {{secondLeg.destination}}</a>
         </div>
-        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" ng-app="travelhunt">
+        <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" >
             <div class="w3-row" ng-controller=AncillarySelection>
                 <div class="w3-col m3">
                     <div class="w3-card w3-round">
@@ -123,23 +123,23 @@
                                                         <li class="trip-type">
                                                             <i class="ytfi-clock-1 ">&nbsp;</i>
                                                             <time>
-                                                            {{secondLeg.departureTime}}
+                                                                {{secondLeg.departureTime}}
                                                             </time>
                                                             <span class="pipe">|</span>
-                                                        <span > {{secondLeg.travelType}}</span>
+                                                            <span > {{secondLeg.travelType}}</span>
 
                                                             <span class="pipe"> | </span>
-                                                        <span>{{secondLeg.destination}}</span>
+                                                            <span>{{secondLeg.destination}}</span>
                                                             <div class="air-journey">
                                                                 <span class="fl">&nbsp;</span>
                                                                 <i class=""></i>
                                                                 <span class="fr">&nbsp;</span>
                                                             </div>
                                                             <h4 class="">
-                                                            <span class="ref-ui"> {{secondLeg.cabinType}} &nbsp;</span>
+                                                                <span class="ref-ui"> {{secondLeg.cabinType}} &nbsp;</span>
                                                                 <span >
                                                                     <span class="pipe"> | </span>
-                                                                <span class="{{secondLeg.isRefundableClass}}">Refundable</span>
+                                                                    <span class="{{secondLeg.isRefundableClass}}">Refundable</span>
                                                                 </span>
                                                             </h4>
                                                         </li>
@@ -154,28 +154,42 @@
 
                                     <table class="w3-table-all w3-card-4">
                                         <tr class="w3-green">
-                                            <th></th>
+                                            <th ng-show="myData.data.stage == '0'"></th>
                                             <th>Ancillary</th>
                                             <th>Actual Price</th>
-                                            <th>Max Discount Price</th>
+
+                                            <th ng-show="myData.data.stage == '1'">Max Discount Price</th>
+
+
+                                            <th ng-show="myData.data.stage == '2'">Current Discount Price</th>
+
+
+                                            <th ng-show="myData.data.stage == '3'">Final Discount Price</th>
+
                                         </tr>
-                                        <tr ng-repeat="ancillary in myData.data.ancillaries">
-                                            <td><input type="checkbox" ng-model="ancillary[0]"></td>
-                                            <td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1]}}</p></td>
-                                        <td>{{ancillary[2]}}</td>
-                                        <td>{{ancillary[3]}}</td>
+                                        <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
+                                            <td ng-show="myData.data.stage == '0'"><div ><input type="checkbox" ng-model="ancillary.ancillaryName"></div></td>
+                                            <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
+                                            <td>{{ancillary.ancillaryName}}</td>
+                                            <td>{{ancillary.totalAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '1'">{{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '2'">{{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '3'">{{ancillary.discountedAmount}}</td>
                                         </tr>
                                     </table>
-                                    <hr>
-                                    <code class="w3-codespan">
-                                    Select any ancillary to start the game.
-                                    Upon completion we get discount based on the game points
-                                    </code>
-                                    <hr>
-                                    <p ><button style="
-                                                margin-top: -10%;
-                                                " class="w3-button w3-green w3-third" onclick="startGame()">Start Game</button></p>
-                                    <hr>
+                                    <div ng-show="myData.data.stage == '1'">
+                                        <hr>
+                                        <code class="w3-codespan">
+                                            Select any ancillary for your return flight and submit to start the game.
+                                            When you are closer to board we book them for you with discount based on the points you earn
+                                        </code>
+                                        <hr>
+                                        <p ><button style="
+                                                    margin-top: -10%;
+                                                    " class="w3-button w3-green w3-third" ng-click="callStartGame()">Start Game</button></p>
+                                        <hr>
+                                    </div>
+
                                 </div>
                                 <div class="show-my-game-div" style="display: none">
 
@@ -183,27 +197,27 @@
                                         <h5 class="w3-text-green" style=" padding-left: 12%; font-size: 20px; font-weight: 900; font-family: sans-serif; text-decoration: underline; ">Welcome to the game</h5>
                                         <h6 class="w3-text-blue">Ancillary wifi -> 150pts</h6>
                                         <div class="w3-display-container mySlides  w3-card-4">
-                                            <img id="img_1_" class="w3-opacity-max" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+                                            <img id="img_1_" class="" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>Dest-1 15points</p>
+                                                <p>The Römerberg 25points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_2" src="images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>Dest-2 25points</p>
+                                                <p>The Museum District 25points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_3" src="images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>Dest-3 5points</p>
+                                                <p>The Palm Garden 25points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_4" src="images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>Dest-4 55points</p>
+                                                <p>Senckenberg  25points</p>
                                             </div>
                                         </div>
                                     </div>
@@ -221,13 +235,38 @@
                                             <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
                                         </div>
                                     </div>
+                                    <table class="w3-table-all w3-card-4">
+                                        <tr class="w3-green">
+                                            <th ng-show="myData.data.stage == '0'"></th>
+                                            <th>Ancillary</th>
+                                            <th>Actual Price</th>
+
+                                            <th ng-show="myData.data.stage == '1'">Max Discount Price</th>
+
+
+                                            <th ng-show="myData.data.stage == '2'">Current Discount Price</th>
+
+
+                                            <th ng-show="myData.data.stage == '3'">Final Price</th>
+
+                                        </tr>
+                                        <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
+                                            <td ng-show="myData.data.stage == '0'"><div ><input type="checkbox" ng-model="ancillary.ancillaryName"></div></td>
+                                            <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
+                                            <td>{{ancillary.ancillaryName}}</td>
+                                            <td>{{ancillary.totalAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '1'">{{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '2'">{{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '3'">{{ancillary.discountedAmount}}</td>
+                                        </tr>
+                                    </table>
 
 
                                     <hr>
                                     <div class="w3-light-grey w3-round-large show-my-div" style="margin-bottom: 10px;display: none" >
                                         <div class="w3-container w3-blue w3-round-large" id="setProgressValue" style="width:25%">1/5</div>
                                     </div>
-                                    <button id="tag_location" class="w3-button w3-purple" onclick="startTimer();" style="display: none;">Tag my location</button>
+                                    <button id="tag_location" class="w3-button w3-purple" ng-click="callUpadateAncillariesGame();" style="display: none;">Tag my location</button>
                                     <hr>
 
                                 </div>
@@ -257,7 +296,7 @@
                                 <h3>Success!</h3>
                                 <p class="show-my-div-p"></p>
                             </div>
-                            <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>Awesome you earned 50points!!!</h6>
+                            <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>Awesome you earned 25points!!!</h6>
                         </div>
                     </div>
                 </div>
@@ -287,8 +326,8 @@
         <script>
             // Accordion
             function startGame(id) {
-            $('.show-my-game-div').show();
-            $('.hide-my-non-game-div').hide();
+//            $('.show-my-game-div').show();
+//            $('.hide-my-non-game-div').hide();
             }
             function myFunction(id) {
             var x = document.getElementById(id);
@@ -366,7 +405,6 @@
             // Slideshow Apartment Images
             var slideIndex = 1;
             showDivs(slideIndex);
-
             function plusDivs(n) {
             showDivs(slideIndex += n);
             }
@@ -403,7 +441,6 @@
         <script>
             var acc = document.getElementsByClassName("accordion");
             var i;
-
             for (i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function () {
             this.classList.toggle("active");
@@ -426,23 +463,82 @@
             $http.get("/retrieve/trips").then(function(response){
             $scope.tripdetails = response.data.retriveRateDetails;
             $scope.firstLeg = response.data.firstLeg;
-                        var f_depDate = new Date($scope.firstLeg.departureTime);
-                        $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
-						$scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
-
+            var f_depDate = new Date($scope.firstLeg.departureTime);
+            $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
+            $scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
             $scope.secondLeg = response.data.secondLeg;
-                        var s_depDate = new Date($scope.secondLeg.departureTime);
-                        $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
-                        $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
-                        
+            var s_depDate = new Date($scope.secondLeg.departureTime);
+            $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
+            $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
             });
+            $http.get('/list/ancillaries').then(function(response) {
 
-            $http.get('/content.json').then(function(response) {
             $scope.myData = response;
             });
+            $scope.callStartGame = function(){
+            var data = {
+            ancillaryIds:['Eco Premium Class']
+            }
+            $http.post("/set/user/ancillaries", JSON.stringify(data)).then(function(response) {
+            $('.show-my-game-div').show();
+            $('.hide-my-non-game-div').hide();
             });
-				
-				
+            }
+
+            $scope.callUpadateAncillariesGame = function(){
+                                                  var getSelectedImg = $('.mySlides img.selected').attr('id');
+            if (!($.inArray(getSelectedImg, storeImgIds) > - 1)) {
+            storeImgIds.push(getSelectedImg);
+            localStorage.setItem('setImageSelection', JSON.stringify(storeImgIds));
+            $('#id01').show();
+            $('.hide-my-div').show();
+            $('.show-my-div').hide();
+            function showPosition(position) {
+            var prepareCoordinates = "Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+            $('.hide-my-div').fadeOut();
+            var getImgsIds = localStorage.getItem('setImageSelection');
+            if (getImgsIds && getImgsIds !== 'null') {
+            var getArray = JSON.parse(getImgsIds);
+            var prepareProgress = getArray.length + '/' + $('.mySlides img').length;
+            var arrlen = getArray.length;
+            var slideLen = $('.mySlides img').length;
+            var calculation = parseFloat(arrlen / slideLen) * 100;
+            
+            var finalArray=getArray.length;
+            var finalImageLengthArray=parseInt($('.mySlides img').length);
+             var data = {
+                      tasksFinished: finalArray,
+                      totalTasks:finalImageLengthArray,
+            }
+            $http.post("/update/ancillaries", JSON.stringify(data)).then(function(response) {
+            alert('ssss');
+            $scope.myData = response;
+            });
+            
+            
+            
+            
+            $('#setProgressValue').css({width: calculation + '%'});
+                    $('#setProgressValue').html(prepareProgress);
+            }
+            $('.show-my-div').fadeIn();
+            $('.show-my-div-p').html(prepareCoordinates)
+            }
+            setTimeout(function () {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            $('.hide-my-div').fadeOut();
+            $('.show-my-div').fadeIn();
+            $('.show-my-div').html('Geolocation is not supported by this browser.')
+            }
+            }, 1000);
+            } else {
+            alert('Location already completed');
+            }
+            }
+            });
             });
         </script>
     </body>

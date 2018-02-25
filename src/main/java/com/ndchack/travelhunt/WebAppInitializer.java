@@ -1,5 +1,7 @@
 package com.ndchack.travelhunt;
 
+import com.ndchack.travelhunt.controller.RetrieveController;
+import com.ndchack.travelhunt.dataprovider.ndc.service.GetOrderService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +20,7 @@ public class WebAppInitializer{
         System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
         System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
         System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dumpTreshold", "999999");
+        GetOrderService controller = new GetOrderService();
         SpringApplication.run(WebAppInitializer.class, args);
 
     }

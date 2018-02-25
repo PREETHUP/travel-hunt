@@ -20,7 +20,7 @@ public class Configuration implements InitializingBean {
     public static String gameStage = "0";
 
     public void afterPropertiesSet() {
-        airlineAncillary.put("Extra Leg Room", Float.valueOf("40"));
+        /*airlineAncillary.put("Extra Leg Room", Float.valueOf("40"));
         airlineAncillary.put("Primary boarding", Float.valueOf("20"));
         airlineAncillary.put("Wifi Internet", Float.valueOf("10"));
 
@@ -28,6 +28,6 @@ public class Configuration implements InitializingBean {
         userSelectedAncillary.put("Wifi Internet", Float.valueOf("10"));
 
         returnDepartureTime = new DateTime("2018-03-01T00:00");
-        departureTime = new DateTime("2018-02-24T17:22");
+        departureTime = new DateTime("2018-02-24T17:22");*/
     }
 }
