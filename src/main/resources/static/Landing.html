@@ -154,7 +154,7 @@
 
                                     <table class="w3-table-all w3-card-4">
                                         <tr class="w3-green">
-                                            <th ng-show="myData.data.stage == '0'"></th>
+                                            <th ng-show="myData.data.stage == '1'"></th>
                                             <th>Ancillary</th>
                                             <th>Actual Price</th>
 
@@ -168,13 +168,13 @@
 
                                         </tr>
                                         <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
-                                            <td ng-show="myData.data.stage == '0'"><div ><input type="checkbox" ng-model="ancillary.ancillaryName"></div></td>
+                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox"></div></td>
                                             <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
                                             <td>{{ancillary.ancillaryName}}</td>
-                                            <td>{{ancillary.totalAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '1'">{{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '2'">{{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '3'">{{ancillary.discountedAmount}}</td>
+                                            <td>£ {{ancillary.totalAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '1'">£ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '2'">£ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '3'">£ {{ancillary.discountedAmount}}</td>
                                         </tr>
                                     </table>
                                     <div ng-show="myData.data.stage == '1'">
@@ -195,29 +195,29 @@
 
                                     <div  id="apartment"  >
                                         <h5 class="w3-text-green" style=" padding-left: 12%; font-size: 20px; font-weight: 900; font-family: sans-serif; text-decoration: underline; ">Welcome to the game</h5>
-                                        <h6 class="w3-text-blue">Ancillary wifi -> 150pts</h6>
+                                       
                                         <div class="w3-display-container mySlides  w3-card-4">
                                             <img id="img_1_" class="" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>The Römerberg 25points</p>
+                                                <p>The Römerberg 15points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_2" src="images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>The Museum District 25points</p>
+                                                <p>The Museum District 15points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_3" src="images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>The Palm Garden 25points</p>
+                                                <p>The Palm Garden 15points</p>
                                             </div>
                                         </div>
                                         <div class="w3-display-container mySlides">
                                             <img id="img_4" src="images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
-                                                <p>Senckenberg  25points</p>
+                                                <p>Senckenberg  15points</p>
                                             </div>
                                         </div>
                                     </div>
@@ -235,9 +235,14 @@
                                             <img class="demo w3-opacity w3-hover-opacity-off" src="images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="w3-light-grey w3-round-large show-my-div" style="margin-bottom: 10px;display: none" >
+                                        <div class="w3-container w3-blue w3-round-large" id="setProgressValue" style="width:25%">1/5</div>
+                                    </div>
+                                    <button id="tag_location" class="w3-button w3-purple" ng-click="callUpadateAncillariesGame();" style="display: none;margin-bottom: 20px;">Tag my location</button>
                                     <table class="w3-table-all w3-card-4">
                                         <tr class="w3-green">
-                                            <th ng-show="myData.data.stage == '0'"></th>
+                                            <th ng-show="myData.data.stage == '1'"></th>
                                             <th>Ancillary</th>
                                             <th>Actual Price</th>
 
@@ -251,24 +256,16 @@
 
                                         </tr>
                                         <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
-                                            <td ng-show="myData.data.stage == '0'"><div ><input type="checkbox" ng-model="ancillary.ancillaryName"></div></td>
+                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox"></div></td>
                                             <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
                                             <td>{{ancillary.ancillaryName}}</td>
-                                            <td>{{ancillary.totalAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '1'">{{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '2'">{{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '3'">{{ancillary.discountedAmount}}</td>
+                                            <td>£ {{ancillary.totalAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '1'">£ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '2'">£ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '3'">£ {{ancillary.discountedAmount}}</td>
                                         </tr>
                                     </table>
-
-
                                     <hr>
-                                    <div class="w3-light-grey w3-round-large show-my-div" style="margin-bottom: 10px;display: none" >
-                                        <div class="w3-container w3-blue w3-round-large" id="setProgressValue" style="width:25%">1/5</div>
-                                    </div>
-                                    <button id="tag_location" class="w3-button w3-purple" ng-click="callUpadateAncillariesGame();" style="display: none;">Tag my location</button>
-                                    <hr>
-
                                 </div>
                             </div>      
                         </div>
@@ -296,7 +293,7 @@
                                 <h3>Success!</h3>
                                 <p class="show-my-div-p"></p>
                             </div>
-                            <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>Awesome you earned 25points!!!</h6>
+                            <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>Awesome you earned 15 points!!!</h6>
                         </div>
                     </div>
                 </div>
@@ -480,9 +477,12 @@
             ancillaryIds:['Eco Premium Class']
             }
             $http.post("/set/user/ancillaries", JSON.stringify(data)).then(function(response) {
+                 $scope.myData = response;
             $('.show-my-game-div').show();
             $('.hide-my-non-game-div').hide();
             });
+             
+            
             }
 
             $scope.callUpadateAncillariesGame = function(){
@@ -512,7 +512,7 @@
                       totalTasks:finalImageLengthArray,
             }
             $http.post("/update/ancillaries", JSON.stringify(data)).then(function(response) {
-            alert('ssss');
+           
             $scope.myData = response;
             });
             
