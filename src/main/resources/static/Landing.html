@@ -85,13 +85,13 @@
                                             <div >
                                                 <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
                                                     <li class="trip-type">
+
+                                                        <span > {{firstLeg.f_depDate_final}}</span>
+                                                        <span class="pipe"> | </span>
                                                         <i class="ytfi-clock-1 ">&nbsp;</i>
                                                         <time>
                                                             {{firstLeg.departureTime}}
                                                         </time>
-                                                        <span class="pipe">|</span>
-                                                        <span > {{firstLeg.travelType}}</span>
-
                                                         <span class="pipe"> | </span>
                                                         <span>{{firstLeg.destination}}</span>
                                                         <div class="air-journey">
@@ -125,14 +125,15 @@
                                                 <div >
                                                     <ul class="leg-details" style="margin-bottom: 15px;width: 95%;margin-top: 15px;">
                                                         <li class="trip-type">
+
+                                                            <span > {{secondLeg.s_depDate_final}}</span>
+
+                                                            <span class="pipe"> | </span>
                                                             <i class="ytfi-clock-1 ">&nbsp;</i>
                                                             <time>
                                                                 {{secondLeg.departureTime}}
                                                             </time>
                                                             <span class="pipe">|</span>
-                                                            <span > {{secondLeg.travelType}}</span>
-
-                                                            <span class="pipe"> | </span>
                                                             <span>{{secondLeg.destination}}</span>
                                                             <div class="air-journey">
                                                                 <span class="fl">&nbsp;</span>
@@ -172,7 +173,7 @@
 
                                         </tr>
                                         <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
-                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox"></div></td>
+                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox" ng-checked="ancillary.isRowSelected" ng-click="toggleSelection(ancillary)" ></div></td>
                                             <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
                                             <td>{{ancillary.ancillaryName}}</td>
                                             <td>£ {{ancillary.totalAmount}}</td>
@@ -199,7 +200,7 @@
 
                                     <div  id="apartment"  >
                                         <h5 class="w3-text-green" style=" padding-left: 12%; font-size: 20px; font-weight: 900; font-family: sans-serif; text-decoration: underline; ">Welcome to the game</h5>
-                                       
+
                                         <div class="w3-display-container mySlides  w3-card-4">
                                             <img id="img_1_" class="" src="images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
                                             <div class="w3-display-bottomleft w3-container w3-black">
@@ -244,6 +245,9 @@
                                         <div class="w3-container w3-blue w3-round-large" id="setProgressValue" style="width:25%">1/5</div>
                                     </div>
                                     <button id="tag_location" class="w3-button w3-purple" ng-click="callUpadateAncillariesGame();" style="display: none;margin-bottom: 20px;">Tag my location</button>
+                                    <h6 class="w3-text-green"> <i class="fa fa-check-circle"></i>
+                                        Congratulations we have booked below ancillaries for your return flight.
+                                    </h6>
                                     <table class="w3-table-all w3-card-4">
                                         <tr class="w3-green">
                                             <th ng-show="myData.data.stage == '1'"></th>
@@ -260,7 +264,7 @@
 
                                         </tr>
                                         <tr ng-repeat="ancillary in myData.data.userAncillaryDetails">
-                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox"></div></td>
+                                            <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox" ng-checked="ancillary.isRowSelected" ng-click="toggleSelection(ancillary)" ></div></td>
                                             <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
                                             <td>{{ancillary.ancillaryName}}</td>
                                             <td>£ {{ancillary.totalAmount}}</td>
@@ -466,11 +470,13 @@
                     $scope.tripdetails = response.data.retriveRateDetails;
                     $scope.firstLeg = response.data.firstLeg;
                                 var f_depDate = new Date($scope.firstLeg.departureTime);
+								$scope.firstLeg.f_depDate_final = new Date($scope.firstLeg.departureTime).toISOString().slice(0, 10); ;
                                 $scope.firstLeg.departureTime = f_depDate.getHours() + "h " + f_depDate.getMinutes() + "m";
         						$scope.firstLeg.isRefundableClass = ($scope.firstLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
 
                     $scope.secondLeg = response.data.secondLeg;
                                 var s_depDate = new Date($scope.secondLeg.departureTime);
+								$scope.secondLeg.s_depDate_final = new Date($scope.secondLeg.departureTime).toISOString().slice(0, 10);
                                 $scope.secondLeg.departureTime = s_depDate.getHours() + "h " + s_depDate.getMinutes() + "m";
                                 $scope.secondLeg.isRefundableClass = ($scope.secondLeg.isRefundable) ? "ref-ui" : "non-ref-ui";
                                 
@@ -487,17 +493,23 @@
             });
             $scope.callStartGame = function(){
             var data = {
-            ancillaryIds:['Eco Premium Class']
+            ancillaryIds:[]
             }
+            for (var i = 0; i < $scope.myData.data.userAncillaryDetails.length; i++){
+            if ($scope.myData.data.userAncillaryDetails[i].isRowSelected === true){
+            data.ancillaryIds.push($scope.myData.data.userAncillaryDetails[i].ancillaryName);
+            }
+            }
+            debugger;
             $http.post("/set/user/ancillaries", JSON.stringify(data)).then(function(response) {
-                 $scope.myData = response;
+            $scope.myData = response;
             $('.show-my-game-div').show();
             $('.hide-my-non-game-div').hide();
             });
             }
 
             $scope.callUpadateAncillariesGame = function(){
-                                                  var getSelectedImg = $('.mySlides img.selected').attr('id');
+            var getSelectedImg = $('.mySlides img.selected').attr('id');
             if (!($.inArray(getSelectedImg, storeImgIds) > - 1)) {
             storeImgIds.push(getSelectedImg);
             localStorage.setItem('setImageSelection', JSON.stringify(storeImgIds));
@@ -515,19 +527,17 @@
             var arrlen = getArray.length;
             var slideLen = $('.mySlides img').length;
             var calculation = parseFloat(arrlen / slideLen) * 100;
-            
-            var finalArray=getArray.length;
-            var finalImageLengthArray=parseInt($('.mySlides img').length);
-             var data = {
-                      tasksFinished: finalArray,
-                      totalTasks:finalImageLengthArray,
+            var finalArray = getArray.length;
+            var finalImageLengthArray = parseInt($('.mySlides img').length);
+            var data = {
+            tasksFinished: finalArray,
+                    totalTasks:finalImageLengthArray,
             }
             $http.post("/update/ancillaries", JSON.stringify(data)).then(function(response) {
             $scope.myData = response;
             });
-            
             $('#setProgressValue').css({width: calculation + '%'});
-                    $('#setProgressValue').html(prepareProgress);
+            $('#setProgressValue').html(prepareProgress);
             }
             $('.show-my-div').fadeIn();
             $('.show-my-div-p').html(prepareCoordinates)
@@ -543,6 +553,16 @@
             }, 1000);
             }
             }
+
+
+
+            $scope.toggleSelection = function(item){
+            item.isRowSelected = !item.isRowSelected;
+            }
+
+
+
+
             });
             });
         </script>
