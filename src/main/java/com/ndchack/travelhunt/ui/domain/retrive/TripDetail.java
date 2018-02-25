@@ -16,6 +16,7 @@ public class TripDetail {
     String destinationCode;
 
     //carrierCode+Flight number AI-436
+    String carrier;
     String flightNumber;
 
     //Economy
@@ -27,6 +28,22 @@ public class TripDetail {
     String duration;
     Date arrivalTime;
     Date departureTime;
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
+
+    public Boolean getRefundable() {
+        return isRefundable;
+    }
+
+    public void setRefundable(Boolean refundable) {
+        isRefundable = refundable;
+    }
 
     public String getSource() {
         return source;

@@ -9,14 +9,14 @@ import com.ndchack.travelhunt.dataprovider.ndc.connector.NDCAccessServer;
  */
 public abstract class NDCService {
 
-    protected NdcResServicePort ndcServicePort = null;
+    protected static NdcResServicePort NDC_SERVICE_PORT = null;
 
     public NDCService() {
 
-        if (ndcServicePort == null) {
+        if (NDC_SERVICE_PORT == null) {
             try {
                 NDCAccessServer server = new NDCAccessServer(CommonEntityBuilder.getURL());
-                ndcServicePort = server.getNdcResServiceSOAPPort();
+                NDC_SERVICE_PORT = server.getNdcResServiceSOAPPort();
             } catch (Exception e) {
                 e.printStackTrace();
             }

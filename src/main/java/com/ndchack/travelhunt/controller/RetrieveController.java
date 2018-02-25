@@ -23,7 +23,7 @@ public class RetrieveController {
 
     public GetOrderService service;
 
-    @RequestMapping(value = "/retrieve/trips", method = RequestMethod.POST)
+    @RequestMapping(value = "/retrieve/trips", method = RequestMethod.GET)
     public RetrieveUserResponse retrieve(@RequestParam(value = "orderId", defaultValue = "R4254R", required = false) String orderId) {
         service = new GetOrderService();
         //Service call
@@ -94,6 +94,7 @@ public class RetrieveController {
         legDetail.setDestination(flightDetail.getArrivalAirport());
         legDetail.setDestinationCode(flightDetail.getArrivalAirport());// No Code available
         legDetail.setCabinType(flightDetail.getCabinClass());
+        legDetail.setCarrier(flightDetail.getMarketingCarrier());
         legDetail.setFlightNumber(flightDetail.getFlightNumber());
         legDetail.setIsRefundable(Boolean.TRUE); // No refundable details available
         legDetail.setTravelType(getTravelType(flightDetail.getNumberOfStops())); //only count is got.

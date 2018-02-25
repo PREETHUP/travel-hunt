@@ -2,7 +2,6 @@ package com.ndchack.travelhunt.dataprovider.ndc.service;
 
 import com.ndchack.travelhunt.dataprovider.ndc.builder.ServiceReqBuilder;
 import com.ndchack.travelhunt.dataprovider.ndc.model.Ancillary;
-import com.ndchack.travelhunt.dataprovider.ndc.model.OrderView;
 import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceList;
 import com.ndchack.travelhunt.dataprovider.ndc.model.ServiceListRequest;
 import org.iata.iata.edist.ServiceListRQ;
@@ -109,7 +108,7 @@ public class GetServiceListService extends NDCService {
         ServiceListRQ rq = ServiceReqBuilder.createRequest(req);
         try {
 
-            ServiceListRS rs = ndcServicePort.listServices(rq);
+            ServiceListRS rs = NDC_SERVICE_PORT.listServices(rq);
 
             ServiceList list = collectPayableServices(rs);
 
