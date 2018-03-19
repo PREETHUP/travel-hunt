@@ -119,6 +119,12 @@
                                     <div class="flight-info-container flight-details-overlay" >
 
                                         <div class="overlay-content">
+                                            <div ng-show="myData.data.stage == '1'">
+                                                <p class="w3-text-green" style="text-align: center;font-size: 19px;text-decoration: underline;
+                                                                        margin-top: 10px;
+                                                                        font-family: sans-serif;
+                                                                        font-weight: 900;">Game is Ready</p>
+                                            </div>
 
                                             <div class=" row itinerary-details">
 
@@ -267,10 +273,10 @@
                                             <td ng-show="myData.data.stage == '1'"><div ><input type="checkbox" ng-checked="ancillary.isRowSelected" ng-click="toggleSelection(ancillary)" ></div></td>
                                             <!--td><p><i class="fa fa-fw fa-wifi"></i>{{ancillary[1].ancillaryName}}</p></td-->
                                             <td>{{ancillary.ancillaryName}}</td>
-                                            <td>£ {{ancillary.totalAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '1'">£ {{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '2'">£ {{ancillary.discountedAmount}}</td>
-                                            <td  ng-show="myData.data.stage == '3'">£ {{ancillary.discountedAmount}}</td>
+                                            <td>€ {{ancillary.totalAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '1'">€ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '2'">€ {{ancillary.discountedAmount}}</td>
+                                            <td  ng-show="myData.data.stage == '3'">€ {{ancillary.discountedAmount}}</td>
                                         </tr>
                                     </table>
                                     <hr>
