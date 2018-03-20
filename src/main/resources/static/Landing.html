@@ -506,7 +506,6 @@
             data.ancillaryIds.push($scope.myData.data.userAncillaryDetails[i].ancillaryName);
             }
             }
-            debugger;
             $http.post("/set/user/ancillaries", JSON.stringify(data)).then(function(response) {
             $scope.myData = response;
             $('.show-my-game-div').show();
