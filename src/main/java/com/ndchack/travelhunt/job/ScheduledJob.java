@@ -46,9 +46,9 @@ public class ScheduledJob {
                     .withSecondOfMinute(0)
                     .withMinuteOfHour(0)
                     .withMillisOfSecond(0)
-                    .plusHours(6);
+                    .minusHours(6);
             log.info("Checking if we should trigger the notification.");
-            if (returnDepartureTime.compareTo(currentTime) == 0 && stop != true) {
+            if (returnDepartureTime.isAfter(currentTime) && stop != true) {
                 stop = true;
                 Configuration.gameStage = "3";
                 log.info("Completed Cron Job !!");

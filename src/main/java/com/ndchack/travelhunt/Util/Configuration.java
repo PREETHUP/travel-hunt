@@ -16,7 +16,8 @@ public class Configuration implements InitializingBean {
     public static HashMap<String, Float> userSelectedAncillary = new HashMap();
     public static HashMap<String, Float> airlineAncillary = new HashMap();
     public static DateTime returnDepartureTime;
-    public static DateTime departureTime;
+    public static DateTime firstLegDepartureTime;
+
     public static String gameStage = "0";
 
     public void afterPropertiesSet() {
@@ -28,6 +29,6 @@ public class Configuration implements InitializingBean {
         userSelectedAncillary.put("Wifi Internet", Float.valueOf("10"));
 
         returnDepartureTime = new DateTime("2018-03-01T00:00");
-        departureTime = new DateTime("2018-02-24T17:22");*/
+        firstLegDepartureTime = new DateTime("2018-02-24T17:22");*/
     }
 }

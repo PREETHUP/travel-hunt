@@ -89,10 +89,11 @@ public class UserAncillaryService {
     public UserAncillaryResponse getAncillaryResponse() {
         UserAncillaryResponse userAncillaryResponse = new UserAncillaryResponse();
 
-        if (new DateTime().isAfter(Configuration.departureTime)) {
+        if (new DateTime().isAfter(Configuration.firstLegDepartureTime)  && Configuration.gameStage.equals("0") ) {
             Configuration.gameStage = "1";
         }
         String stage = Configuration.gameStage;
+        System.out.println("Current Stage is + " + stage);
         userAncillaryResponse.setStage(stage);
 
         if( (stage.equals("0") && !Configuration.airlineAncillary.isEmpty()) ) {

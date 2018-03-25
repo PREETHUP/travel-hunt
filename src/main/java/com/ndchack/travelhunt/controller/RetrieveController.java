@@ -107,7 +107,7 @@ public class RetrieveController {
         legDetail.setDepartureTime(departureTime.toDate());
 
         if (isFirstLeg) {
-            Configuration.departureTime = departureTime;
+            Configuration.firstLegDepartureTime = departureTime;
         } else {
             Configuration.returnDepartureTime = departureTime;
         }
